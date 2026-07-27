@@ -1,0 +1,276 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 ByteRay Ltd.
+#
+# Xpsd - convenience launcher for the reachability scanner (Docker mode).
+#
+# Builds the all-in-one Docker image on demand, then runs the analysis with
+# the source tree mounted read-only. All Xpsd flags are forwarded; -source
+# and -out are translated to container-internal paths automatically.
+#
+# Usage:
+#   ./xpsd -source <dir> -cve "<description>"   [flags...]
+#   ./xpsd -source <dir> -cve-file <file>       [flags...]
+#   ./xpsd -list-models
+#   ./xpsd -h | --help
+#
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+IMAGE="xpsd:latest"
+
+usage() {
+	cat <<'EOF'
+xpsd - is a given CVE reachable in a given source tree? (Docker)
+
+Usage:
+  xpsd -source <dir> (-cve "<text>" | -cve-file <file> | -scan <report>) [flags...]
+
+Required:
+  -source <dir>        project source directory (mounted read-only)
+  -cve "<text>"        vulnerability description, OR
+  -cve-file <file>     read the description from a file, OR
+  -scan <report>       scanner report (Grype/Trivy/OSV-Scanner/Snyk JSON or
+                       SARIF); every finding is analyzed
+
+Scan mode:
+  -scan-format <f>     auto | grype | trivy | osv | snyk | sarif (default: auto)
+  -max-findings N      analyze at most N findings, highest severity first
+  -min-severity <s>    skip findings below low|medium|high|critical
+  -min-cvss N          skip findings with CVSS base score below N (unscored kept)
+  -no-enrich           skip OSV lookup of missing severity/CVSS before filtering
+  -is-remote           only remotely exploitable findings (CVSS AV:N)
+  -is-exploited        only findings with known exploitation (CVSS-BT)
+  -only <ids>          comma-separated CVE/GHSA ids to analyze
+  -fail-on <t>         exit 2 when verdicts reach reachable|uncertain
+
+Project context:
+  -guidance <file>     authoritative notes on how this project is built,
+                       deployed, and exposed; injected into the prompt
+
+Output:
+  -out <dir>           output dir; artifacts under <out>/xpsd/ (default: out)
+  -sarif-out <file>    write SARIF 2.1.0 for GitHub code scanning
+
+Loop budgets:
+  -max-cycles N        tool-call budget (default: 50)
+  -max-tokens N        deny tool calls past N context tokens (0 = off)
+  -timeout DUR         overall wall-clock timeout (default: 1h)
+
+Tool / MCP:
+  -max-result-kb N     truncate tool results over N KB (default: 32)
+  -max-tool-output-kb N  mcp inline cap before spilling to file (default: 24)
+  -tool-timeout MS     per-tool-call timeout in ms (default: 300000)
+  -no-web              disable the fetch_url tool
+  -no-markdown=false   also render the markdown report (off by default)
+
+Model / provider:
+  -model <name>        model name (omit to pick interactively)
+  -effort <level>      reasoning effort: low | medium | high | xhigh
+  -provider-type <t>   BYOK: openai | anthropic | azure (omit for Copilot)
+  -base-url <url>      BYOK base URL
+  -api-key <key>       BYOK key (or env OPENAI_API_KEY / ANTHROPIC_API_KEY)
+  -list-models         list available models and exit
+
+Misc:
+  -v                   verbose logging
+  -h, --help           show this help
+
+Environment:
+  GH_TOKEN             Copilot auth token (default: taken from `gh auth token`)
+  OPENAI_API_KEY       passed into the container for BYOK
+  ANTHROPIC_API_KEY    passed into the container for BYOK
+  AZURE_OPENAI_KEY     passed into the container for BYOK
+  XPSD_REBUILD=1       force a Docker image rebuild
+EOF
+}
+
+case "${1:-}" in
+	-h|--help|help)
+		usage
+		exit 0
+		;;
+esac
+
+# ---------------------------------------------------------------------------
+# Build the Docker image if missing (or when XPSD_REBUILD=1).
+# ---------------------------------------------------------------------------
+need_build="${XPSD_REBUILD:-0}"
+if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
+	need_build=1
+fi
+if [ "$need_build" != "0" ]; then
+	echo "xpsd: building Docker image..." >&2
+	make -C "$ROOT" docker >&2
+fi
+
+# ---------------------------------------------------------------------------
+# Common Docker args: credentials, env passthrough, Chromium shm.
+# ---------------------------------------------------------------------------
+common_args=(
+    --rm -i
+    --shm-size=1g
+)
+# Copilot CLI reads GH_TOKEN; fall back to the host gh login.
+if [ -z "${GH_TOKEN:-}" ] && command -v gh >/dev/null 2>&1; then
+	GH_TOKEN="$(gh auth token 2>/dev/null || true)"
+fi
+[ -n "${GH_TOKEN:-}" ] && common_args+=(-e "GH_TOKEN=$GH_TOKEN")
+# Pass through API-key env vars for BYOK providers.
+for var in OPENAI_API_KEY ANTHROPIC_API_KEY AZURE_OPENAI_KEY; do
+	[ -n "${!var:-}" ] && common_args+=(-e "$var")
+done
+
+# ---------------------------------------------------------------------------
+# -list-models: run with common args only (no source mount needed).
+# ---------------------------------------------------------------------------
+for a in "$@"; do
+	case "$a" in -list-models|--list-models)
+		exec docker run "${common_args[@]}" "$IMAGE" "$@"
+	;; esac
+done
+
+# ---------------------------------------------------------------------------
+# Parse -source, -out, and file args; rewrite file flags to container paths.
+# ---------------------------------------------------------------------------
+SOURCE=""
+OUT_DIR="out"
+CVE_FILE=""
+GUIDANCE_FILE=""
+SCAN_FILE=""
+SARIF_OUT=""
+fwd_args=()
+while [ $# -gt 0 ]; do
+	case "$1" in
+		-source)        SOURCE="$2"; shift 2 ;;
+		-source=*)      SOURCE="${1#*=}"; shift ;;
+		-out)           OUT_DIR="$2"; shift 2 ;;
+		-out=*)         OUT_DIR="${1#*=}"; shift ;;
+		-cve-file)      CVE_FILE="$2"; shift 2 ;;
+		-cve-file=*)    CVE_FILE="${1#*=}"; shift ;;
+		-guidance)      GUIDANCE_FILE="$2"; shift 2 ;;
+		-guidance=*)    GUIDANCE_FILE="${1#*=}"; shift ;;
+		-scan)          SCAN_FILE="$2"; shift 2 ;;
+		-scan=*)        SCAN_FILE="${1#*=}"; shift ;;
+		-sarif-out)     SARIF_OUT="$2"; shift 2 ;;
+		-sarif-out=*)   SARIF_OUT="${1#*=}"; shift ;;
+		*)              fwd_args+=("$1"); shift ;;
+	esac
+done
+
+if [ -z "$SOURCE" ]; then
+	echo "error: -source <dir> is required" >&2
+	exit 1
+fi
+SOURCE="$(cd "$SOURCE" && pwd)"
+mkdir -p "$OUT_DIR"
+OUT_DIR="$(cd "$OUT_DIR" && pwd)"
+
+file_mounts=()
+if [ -n "$CVE_FILE" ]; then
+	[ -f "$CVE_FILE" ] || { echo "error: -cve-file $CVE_FILE not found" >&2; exit 1; }
+	CVE_FILE="$(cd "$(dirname "$CVE_FILE")" && pwd)/$(basename "$CVE_FILE")"
+	file_mounts+=(-v "$CVE_FILE:/workspace/cve.txt:ro")
+	fwd_args+=(-cve-file /workspace/cve.txt)
+fi
+if [ -n "$GUIDANCE_FILE" ]; then
+	[ -f "$GUIDANCE_FILE" ] || { echo "error: -guidance $GUIDANCE_FILE not found" >&2; exit 1; }
+	GUIDANCE_FILE="$(cd "$(dirname "$GUIDANCE_FILE")" && pwd)/$(basename "$GUIDANCE_FILE")"
+	file_mounts+=(-v "$GUIDANCE_FILE:/workspace/guidance.txt:ro")
+	fwd_args+=(-guidance /workspace/guidance.txt)
+fi
+if [ -n "$SCAN_FILE" ]; then
+	[ -f "$SCAN_FILE" ] || { echo "error: -scan $SCAN_FILE not found" >&2; exit 1; }
+	SCAN_FILE="$(cd "$(dirname "$SCAN_FILE")" && pwd)/$(basename "$SCAN_FILE")"
+	file_mounts+=(-v "$SCAN_FILE:/workspace/scan-report.json:ro")
+	fwd_args+=(-scan /workspace/scan-report.json)
+fi
+if [ -n "$SARIF_OUT" ]; then
+	# Write the SARIF inside the mounted out dir, then the host path maps 1:1.
+	fwd_args+=(-sarif-out "/workspace/out/$(basename "$SARIF_OUT")")
+	echo "xpsd: SARIF will be written to $OUT_DIR/$(basename "$SARIF_OUT")" >&2
+fi
+
+# ---------------------------------------------------------------------------
+# Interactive model selection (when stdin is a terminal and no -model given).
+# ---------------------------------------------------------------------------
+select_model() {
+	local raw
+	raw="$(docker run "${common_args[@]}" "$IMAGE" -list-models ${fwd_args[@]+"${fwd_args[@]}"} 2>/dev/null)" || return 1
+	[ -z "$raw" ] && return 1
+
+	local -a ids=() efforts=() labels=()
+	local id eff ctx prompt name effort_clean marker
+	while IFS=$'\t' read -r id eff ctx prompt name; do
+		[ -n "$id" ] || continue
+		effort_clean="${eff%\*}"
+		marker=""
+		[ "$eff" != "$effort_clean" ] && marker=" (default)"
+		[ "$effort_clean" = "-" ] && effort_clean=""
+		ids+=("$id")
+		efforts+=("$effort_clean")
+		if [ -n "$effort_clean" ]; then
+			labels+=("$(printf '%-30s effort=%-7s%s' "$id" "$effort_clean" "$marker")")
+		else
+			labels+=("$id")
+		fi
+	done <<< "$raw"
+
+	if [ "${#ids[@]}" -eq 0 ]; then
+		echo "xpsd: no models returned" >&2
+		return 1
+	fi
+
+	echo "Available models:" >&2
+	local i
+	for i in "${!ids[@]}"; do
+		printf '  [%2d] %s\n' "$((i + 1))" "${labels[$i]}" >&2
+	done
+
+	local choice
+	while :; do
+		printf 'Select a model [1-%d]: ' "${#ids[@]}" >&2
+		read -r choice </dev/tty || return 1
+		case "$choice" in
+			'' | *[!0-9]*) echo "  enter a number from the list" >&2; continue ;;
+		esac
+		if [ "$choice" -ge 1 ] && [ "$choice" -le "${#ids[@]}" ]; then
+			printf '%s\t%s\n' "${ids[$((choice - 1))]}" "${efforts[$((choice - 1))]}"
+			return 0
+		fi
+		echo "  out of range" >&2
+	done
+}
+
+has_model=0
+has_effort=0
+for a in ${fwd_args[@]+"${fwd_args[@]}"}; do
+	case "$a" in
+		-model|-model=*) has_model=1 ;;
+		-effort|-effort=*) has_effort=1 ;;
+	esac
+done
+
+if [ "$has_model" -eq 0 ] && [ -t 0 ]; then
+	if sel="$(select_model)"; then
+		IFS=$'\t' read -r sel_model sel_effort <<< "$sel"
+		fwd_args=(-model "$sel_model" ${fwd_args[@]+"${fwd_args[@]}"})
+		if [ -n "${sel_effort:-}" ] && [ "$has_effort" -eq 0 ]; then
+			fwd_args=(-effort "$sel_effort" ${fwd_args[@]+"${fwd_args[@]}"})
+		fi
+	else
+		exit 1
+	fi
+fi
+
+# ---------------------------------------------------------------------------
+# Run.
+# ---------------------------------------------------------------------------
+exec docker run "${common_args[@]}" \
+	-v "$SOURCE:/workspace/source:ro" \
+	-v "$OUT_DIR:/workspace/out" \
+	${file_mounts[@]+"${file_mounts[@]}"} \
+	"$IMAGE" \
+	-source /workspace/source \
+	-out /workspace/out \
+	${fwd_args[@]+"${fwd_args[@]}"}

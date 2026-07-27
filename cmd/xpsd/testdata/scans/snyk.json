@@ -1,0 +1,444 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "SNYK-JS-LODASH-567746",
+      "title": "Prototype Pollution",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:L/E:P",
+      "credit": [
+        "posix"
+      ],
+      "semver": {
+        "vulnerable": [
+          "<4.17.16"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "4.17.16"
+      ],
+      "patches": [],
+      "language": "js",
+      "severity": "high",
+      "cvssScore": 7.4,
+      "functions": [],
+      "moduleName": "lodash",
+      "references": [
+        {
+          "url": "https://hackerone.com/reports/712065",
+          "title": "HackerOne Report"
+        },
+        {
+          "url": "https://github.com/lodash/lodash/commit/c84fe82760fb2d3e03a63379b297a1cc1a2fce12",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/lodash/lodash/issues/4744",
+          "title": "GitHub Issue"
+        }
+      ],
+      "identifiers": {
+        "CVE": [
+          "CVE-2020-8203"
+        ],
+        "CWE": [
+          "CWE-400",
+          "CWE-1321"
+        ],
+        "GHSA": [
+          "GHSA-p6mc-m468-83gw"
+        ]
+      },
+      "packageName": "lodash",
+      "creationTime": "2020-04-28T10:54:44.994000Z",
+      "packageManager": "npm",
+      "disclosureTime": "2020-04-28T10:52:47Z",
+      "publicationTime": "2020-04-28T15:54:45Z",
+      "modificationTime": "2022-01-03T16:07:22.372435Z",
+      "description": "## Overview\n[lodash](https://www.npmjs.com/package/lodash) is a modern JavaScript utility library delivering modularity, performance, & extras.\n\nAffected versions of this package are vulnerable to Prototype Pollution via the `zipObjectDeep` function. When provided with malicious property paths, it is possible to modify the prototype of `Object`, causing the addition or modification of an existing property that will exist on all objects.\n\n## PoC\n```js\nconst _ = require('lodash');\n_.zipObjectDeep(['__proto__.z'], [123]);\nconsole.log(z); // 123\n```\n\n## Remediation\nUpgrade `lodash` to version 4.17.16 or higher.\n\n## References\n- [GitHub Commit](https://github.com/lodash/lodash/commit/c84fe82760fb2d3e03a63379b297a1cc1a2fce12)\n- [HackerOne Report](https://hackerone.com/reports/712065)\n",
+      "from": [
+        "xpsd-fixture-app@1.0.0",
+        "lodash@4.17.15"
+      ],
+      "upgradePath": [
+        false,
+        "lodash@4.17.16"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "lodash",
+      "version": "4.17.15"
+    },
+    {
+      "id": "SNYK-JS-LODASH-1040724",
+      "title": "Command Injection",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H/E:P",
+      "credit": [
+        "Marc Hebert"
+      ],
+      "semver": {
+        "vulnerable": [
+          "<4.17.21"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "4.17.21"
+      ],
+      "patches": [],
+      "language": "js",
+      "severity": "high",
+      "cvssScore": 7.2,
+      "functions": [],
+      "moduleName": "lodash",
+      "references": [
+        {
+          "url": "https://github.com/lodash/lodash/commit/3469357cff396a26c363f8c1b5a91dde28ba4b1c",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://snyk.io/vuln/SNYK-JS-LODASH-1040724",
+          "title": "Snyk Advisory"
+        }
+      ],
+      "identifiers": {
+        "CVE": [
+          "CVE-2021-23337"
+        ],
+        "CWE": [
+          "CWE-78",
+          "CWE-94"
+        ],
+        "GHSA": [
+          "GHSA-35jh-r3h4-6jhm"
+        ]
+      },
+      "packageName": "lodash",
+      "creationTime": "2020-10-06T09:36:03.798000Z",
+      "packageManager": "npm",
+      "disclosureTime": "2020-10-06T09:33:33Z",
+      "publicationTime": "2021-02-15T13:07:14Z",
+      "modificationTime": "2022-01-03T16:08:50.373368Z",
+      "description": "## Overview\n[lodash](https://www.npmjs.com/package/lodash) is a modern JavaScript utility library delivering modularity, performance, & extras.\n\nAffected versions of this package are vulnerable to Command Injection via the `template` function. The `variable` option of `_.template` is not sanitized, allowing arbitrary code to be injected into the compiled template function.\n\n## Remediation\nUpgrade `lodash` to version 4.17.21 or higher.\n\n## References\n- [GitHub Commit](https://github.com/lodash/lodash/commit/3469357cff396a26c363f8c1b5a91dde28ba4b1c)\n",
+      "from": [
+        "xpsd-fixture-app@1.0.0",
+        "lodash@4.17.15"
+      ],
+      "upgradePath": [
+        false,
+        "lodash@4.17.21"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "lodash",
+      "version": "4.17.15"
+    },
+    {
+      "id": "SNYK-JS-LODASH-1018905",
+      "title": "Regular Expression Denial of Service (ReDoS)",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H/E:P",
+      "credit": [
+        "Liyuan Chen"
+      ],
+      "semver": {
+        "vulnerable": [
+          "<4.17.21"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "4.17.21"
+      ],
+      "patches": [],
+      "language": "js",
+      "severity": "medium",
+      "cvssScore": 5.3,
+      "functions": [],
+      "moduleName": "lodash",
+      "references": [
+        {
+          "url": "https://github.com/lodash/lodash/blob/npm/trimEnd.js%23L8",
+          "title": "Vulnerable Code"
+        },
+        {
+          "url": "https://snyk.io/vuln/SNYK-JS-LODASH-1018905",
+          "title": "Snyk Advisory"
+        }
+      ],
+      "identifiers": {
+        "CVE": [
+          "CVE-2020-28500"
+        ],
+        "CWE": [
+          "CWE-400",
+          "CWE-1333"
+        ],
+        "GHSA": [
+          "GHSA-29mw-wpgm-hmr9"
+        ]
+      },
+      "packageName": "lodash",
+      "creationTime": "2020-10-27T10:52:39.436000Z",
+      "packageManager": "npm",
+      "disclosureTime": "2020-10-27T10:47:43Z",
+      "publicationTime": "2021-02-15T13:07:15Z",
+      "modificationTime": "2022-01-03T16:08:51.373368Z",
+      "description": "## Overview\n[lodash](https://www.npmjs.com/package/lodash) is a modern JavaScript utility library delivering modularity, performance, & extras.\n\nAffected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS) via the `toNumber`, `trim` and `trimEnd` functions when handling untrusted long strings.\n\n## Remediation\nUpgrade `lodash` to version 4.17.21 or higher.\n",
+      "from": [
+        "xpsd-fixture-app@1.0.0",
+        "lodash@4.17.15"
+      ],
+      "upgradePath": [
+        false,
+        "lodash@4.17.21"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "lodash",
+      "version": "4.17.15"
+    },
+    {
+      "id": "SNYK-JS-MINIMIST-559764",
+      "title": "Prototype Pollution",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L/E:P",
+      "credit": [
+        "Snyk Security Team"
+      ],
+      "semver": {
+        "vulnerable": [
+          "<0.2.1",
+          ">=1.0.0 <1.2.3"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "0.2.1",
+        "1.2.3"
+      ],
+      "patches": [],
+      "language": "js",
+      "severity": "medium",
+      "cvssScore": 5.6,
+      "functions": [],
+      "moduleName": "minimist",
+      "references": [
+        {
+          "url": "https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://snyk.io/blog/prototype-pollution-minimist/",
+          "title": "Snyk Blog"
+        }
+      ],
+      "identifiers": {
+        "CVE": [
+          "CVE-2020-7598"
+        ],
+        "CWE": [
+          "CWE-1321"
+        ],
+        "GHSA": [
+          "GHSA-vh95-rmgr-6w4m"
+        ]
+      },
+      "packageName": "minimist",
+      "creationTime": "2020-03-11T08:22:19.589000Z",
+      "packageManager": "npm",
+      "disclosureTime": "2020-03-10T08:22:24Z",
+      "publicationTime": "2020-03-11T08:22:19Z",
+      "modificationTime": "2021-09-23T10:46:35.517000Z",
+      "description": "## Overview\n[minimist](https://www.npmjs.com/package/minimist) is a parser of argument options.\n\nAffected versions of this package are vulnerable to Prototype Pollution. The library could be tricked into adding or modifying properties of `Object.prototype` using a constructor or `__proto__` payload.\n\n## Remediation\nUpgrade `minimist` to version 0.2.1, 1.2.3 or higher.\n",
+      "from": [
+        "xpsd-fixture-app@1.0.0",
+        "mkdirp@0.5.1",
+        "minimist@0.0.8"
+      ],
+      "upgradePath": [
+        false,
+        "mkdirp@0.5.5",
+        "minimist@1.2.5"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "minimist",
+      "version": "0.0.8"
+    },
+    {
+      "id": "SNYK-JS-ANSIREGEX-1583908",
+      "title": "Regular Expression Denial of Service (ReDoS)",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H/E:P",
+      "credit": [
+        "Yeting Li"
+      ],
+      "semver": {
+        "vulnerable": [
+          ">=3.0.0 <3.0.1",
+          ">=4.0.0 <4.1.1",
+          ">=5.0.0 <5.0.1",
+          ">=6.0.0 <6.0.1"
+        ]
+      },
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "3.0.1",
+        "4.1.1",
+        "5.0.1",
+        "6.0.1"
+      ],
+      "patches": [],
+      "language": "js",
+      "severity": "high",
+      "cvssScore": 7.5,
+      "functions": [],
+      "moduleName": "ansi-regex",
+      "references": [
+        {
+          "url": "https://github.com/chalk/ansi-regex/commit/8d1d7cdb586269882c4bdc1b7325d0c58c8f76f9",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://github.com/chalk/ansi-regex/issues/38",
+          "title": "GitHub Issue"
+        }
+      ],
+      "identifiers": {
+        "CVE": [
+          "CVE-2021-3807"
+        ],
+        "CWE": [
+          "CWE-400",
+          "CWE-1333"
+        ],
+        "GHSA": [
+          "GHSA-93q8-gq69-wqmw"
+        ]
+      },
+      "packageName": "ansi-regex",
+      "creationTime": "2021-09-13T09:27:41.998000Z",
+      "packageManager": "npm",
+      "disclosureTime": "2021-09-13T09:25:37Z",
+      "publicationTime": "2021-09-13T13:04:33Z",
+      "modificationTime": "2022-09-01T09:20:22.998000Z",
+      "description": "## Overview\n[ansi-regex](https://www.npmjs.com/package/ansi-regex) is a regular expression for matching ANSI escape codes.\n\nAffected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS) due to a sub-pattern with quantified overlapping adjacency. Matching crafted invalid ANSI escape codes can take polynomial time in the input length.\n\n## Remediation\nUpgrade `ansi-regex` to version 3.0.1, 4.1.1, 5.0.1, 6.0.1 or higher.\n",
+      "from": [
+        "xpsd-fixture-app@1.0.0",
+        "chalk@2.4.2",
+        "ansi-styles@3.2.1",
+        "ansi-regex@5.0.0"
+      ],
+      "upgradePath": [
+        false,
+        "chalk@2.4.2",
+        "ansi-styles@3.2.1",
+        "ansi-regex@5.0.1"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "ansi-regex",
+      "version": "5.0.0"
+    },
+    {
+      "id": "SNYK-JS-NODEFETCH-2342118",
+      "title": "Information Exposure",
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:N",
+      "credit": [
+        "jayngng"
+      ],
+      "semver": {
+        "vulnerable": [
+          "<2.6.7",
+          ">=3.0.0 <3.1.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.6.7",
+        "3.1.1"
+      ],
+      "patches": [],
+      "language": "js",
+      "severity": "medium",
+      "cvssScore": 6.5,
+      "functions": [],
+      "moduleName": "node-fetch",
+      "references": [
+        {
+          "url": "https://github.com/node-fetch/node-fetch/commit/36e47e8a6406185921e4985dcbeff140d73eaa10",
+          "title": "GitHub Commit"
+        },
+        {
+          "url": "https://huntr.dev/bounties/d26ab655-38d6-48b3-be15-f9ad6b6ae6f7/",
+          "title": "Huntr Report"
+        }
+      ],
+      "identifiers": {
+        "CVE": [
+          "CVE-2022-0235"
+        ],
+        "CWE": [
+          "CWE-200"
+        ],
+        "GHSA": [
+          "GHSA-r683-j2x4-v87g"
+        ]
+      },
+      "packageName": "node-fetch",
+      "creationTime": "2022-01-17T09:26:59.148000Z",
+      "packageManager": "npm",
+      "disclosureTime": "2022-01-16T22:00:00Z",
+      "publicationTime": "2022-01-17T09:27:00Z",
+      "modificationTime": "2022-11-01T11:35:11.148000Z",
+      "description": "## Overview\n[node-fetch](https://www.npmjs.com/package/node-fetch) is a light-weight module that brings window.fetch to node.js.\n\nAffected versions of this package are vulnerable to Information Exposure when fetching a remote URL that redirects to a different origin: `Cookie`, `Authorization` and `WWW-Authenticate` headers are forwarded to the new origin.\n\n## Remediation\nUpgrade `node-fetch` to version 2.6.7, 3.1.1 or higher.\n",
+      "from": [
+        "xpsd-fixture-app@1.0.0",
+        "node-fetch@2.6.1"
+      ],
+      "upgradePath": [
+        false,
+        "node-fetch@2.6.7"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "node-fetch",
+      "version": "2.6.1"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 87,
+  "org": "argus-xpsd",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.0\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "AGPL-1.0": {
+        "licenseType": "AGPL-1.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "GPL-3.0": {
+        "licenseType": "GPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      }
+    }
+  },
+  "packageManager": "npm",
+  "ignoreSettings": {
+    "adminOnly": false,
+    "reasonRequired": false,
+    "disregardFilesystemIgnores": false,
+    "autoApproveIgnores": false
+  },
+  "summary": "6 vulnerable dependency paths",
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 6,
+  "targetFile": "package.json",
+  "projectName": "xpsd-fixture-app",
+  "displayTargetFile": "package.json",
+  "path": "/work/src"
+}

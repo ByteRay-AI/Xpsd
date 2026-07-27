@@ -1,0 +1,51 @@
+Xpsd
+Copyright 2026 ByteRay Ltd.
+
+Licensed under the Apache License, Version 2.0. See LICENSE for the full text.
+
+================================================================================
+THIRD-PARTY COMPONENTS
+================================================================================
+
+The published container image (ghcr.io/byteray-ai/xpsd) bundles the software
+below. Each component stays under its own license, and each ships its license
+text inside the image under /usr/local/lib/node_modules, the Python site
+packages, or /usr/share/doc.
+
+GitHub Copilot CLI (@github/copilot)
+  Copyright (c) GitHub, Inc. Proprietary; not open source.
+  License text ships at https://github.com/github/copilot-cli.
+  Redistributed unmodified as one component of Xpsd, under the redistribution
+  terms of that license. Xpsd does not modify it and is not a standalone
+  distribution of it.
+
+ast-grep (@ast-grep/cli)
+  MIT License. https://github.com/ast-grep/ast-grep
+
+GitHub Copilot SDK for Go (github.com/github/copilot-sdk/go)
+  MIT License. https://github.com/github/copilot-sdk
+
+mcp-go (github.com/mark3labs/mcp-go)
+  MIT License. https://github.com/mark3labs/mcp-go
+
+jsonschema (github.com/santhosh-tekuri/jsonschema)
+  Apache License 2.0. https://github.com/santhosh-tekuri/jsonschema
+
+Playwright for Python
+  Apache License 2.0. https://github.com/microsoft/playwright-python
+
+Chromium, installed by Playwright
+  BSD 3-Clause License, plus the licenses of the third-party components
+  Chromium itself bundles.
+  https://chromium.googlesource.com/chromium/src/+/main/LICENSE
+
+Beautiful Soup (beautifulsoup4)
+  MIT License. https://www.crummy.com/software/BeautifulSoup/
+
+Base images and Debian packages
+  Built on golang:1.25-bookworm and node:20-bookworm-slim, installing python3,
+  python3-pip, git, grep, and ca-certificates from Debian. These carry their
+  own licenses; see /usr/share/doc in the image.
+
+Transitive Go dependencies are recorded in cmd/xpsd/go.sum and
+tools/mcp-server/src/go.sum, each under its own license.

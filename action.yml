@@ -1,0 +1,137 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 ByteRay Ltd.
+
+name: Xpsd CVE Reachability Check
+description: >-
+  Determine whether vulnerabilities (a single CVE, or every finding in a
+  Grype/Trivy/OSV-Scanner/Snyk scan report) are reachable in your codebase and
+  emit a SARIF report for GitHub code scanning.
+
+inputs:
+  source:
+    description: Source directory to analyse (relative to repo root).
+    default: .
+  cve:
+    description: CVE / vulnerability description text (single-CVE mode).
+  cve-file:
+    description: Path to a file containing the CVE description (relative to repo root).
+  scan-file:
+    description: >-
+      Path to a vulnerability scan report (relative to repo root) produced by
+      Grype, Trivy, OSV-Scanner, or Snyk (JSON), or any scanner's SARIF output.
+      Every finding in it is analyzed. Exactly one of cve, cve-file, scan-file
+      is required.
+  scan-format:
+    description: Scan report format — auto | grype | trivy | osv | snyk | sarif.
+    default: auto
+  max-findings:
+    description: >-
+      Scan mode only. Analyze at most N findings, highest severity first
+      (0 = all). Applied after every other filter.
+    default: "0"
+  min-severity:
+    description: >-
+      Scan mode only. Skip findings below this severity: low | medium | high |
+      critical.
+  min-cvss:
+    description: >-
+      Skip findings whose CVSS base score is below this value (0-10). Findings
+      with no score are kept. Combine with min-severity.
+  is-remote:
+    description: >-
+      Scan mode only. Only analyze findings shown to be remotely exploitable
+      (CVSS AV:N). Applied after enrichment; a finding with no CVSS vector
+      cannot be shown remote and is dropped.
+    default: "false"
+  is-exploited:
+    description: >-
+      Scan mode only. Only analyze findings with known exploitation or public
+      exploit code, from the CVSS-BT dataset (CISA KEV, VulnCheck KEV,
+      ExploitDB, Metasploit, Nuclei, or a GitHub PoC). Applied after enrichment;
+      a CVE absent from the dataset is dropped. Downloads roughly 80 MB when
+      enabled, and fails the step if that download fails.
+    default: "false"
+  no-enrich:
+    description: >-
+      Do not look up missing severity / CVSS scores from the OSV database before
+      filtering. Enrichment is on by default so severity/CVSS filters work even
+      when the scan report omits scores.
+    default: "false"
+  only:
+    description: >-
+      Comma-separated vulnerability ids (CVE/GHSA/...) to analyze from the
+      scan report; matches ids and aliases. Empty = all findings.
+  guidance:
+    description: >-
+      Authoritative context about this project (how it is built, deployed, and
+      exposed), injected into the analysis prompt as ground truth. Free text;
+      use a YAML block scalar for multiple lines.
+  guidance-file:
+    description: Path to a file with the same guidance text (relative to repo root). Used when guidance is empty.
+  fail-on:
+    description: >-
+      Fail the step (exit code 2) when verdicts reach this threshold —
+      "reachable" (any reachable=yes) or "uncertain" (also uncertain/errored).
+      Empty = never fail on verdicts.
+  model:
+    description: Model name (e.g. gpt-5.3-codex). Required in CI.
+    required: true
+  effort:
+    description: Reasoning effort — low | medium | high | xhigh.
+  max-cycles:
+    description: >-
+      Tool-call budget for each analysis loop. Whichever of max-cycles and
+      max-tokens is reached first stops further tool calls and asks the model
+      for its verdict.
+    default: "50"
+  max-tokens:
+    description: >-
+      Context-token budget for each analysis loop (0 = unlimited). Whichever of
+      max-cycles and max-tokens is reached first stops further tool calls and
+      asks the model for its verdict.
+    default: "0"
+  out-dir:
+    description: Output directory for verdicts, reports, and results.sarif (relative to repo root).
+    default: xpsd-results
+  no-web:
+    description: Disable the fetch_url tool.
+    default: "false"
+  no-markdown:
+    description: >-
+      Skip the per-finding markdown report rendering pass (one extra LLM call
+      per finding); verdicts and SARIF are unaffected. Defaults to true; set to
+      "false" to also render the markdown reports.
+    default: "true"
+  verbose:
+    description: Enable verbose logging.
+    default: "false"
+  provider-type:
+    description: BYOK provider type — openai | anthropic | azure. Omit to use GitHub Copilot.
+  base-url:
+    description: BYOK base URL.
+  api-key:
+    description: BYOK API key. Prefer passing a repository secret.
+  github-token:
+    description: >-
+      Token used to authenticate with GitHub Copilot. Defaults to the built-in
+      github.token, which works when the job grants `copilot-requests: write`
+      (org-owned repos with the Copilot-CLI-billing policy). Otherwise pass a
+      PAT with the Copilot Requests permission.
+    default: ${{ github.token }}
+
+# Docker container action: the entrypoint writes these to $GITHUB_OUTPUT.
+outputs:
+  sarif-file:
+    description: Path to the generated SARIF file (relative to the workspace).
+  reachable:
+    description: >-
+      Single-CVE mode: the verdict (yes | no | uncertain). Scan mode: "yes"
+      when at least one finding is reachable, else "no".
+  reachable-count:
+    description: Scan mode — number of findings judged reachable.
+
+runs:
+  using: docker
+  image: docker://ghcr.io/byteray-ai/xpsd:1
+  env:
+    GH_TOKEN: ${{ inputs.github-token }}

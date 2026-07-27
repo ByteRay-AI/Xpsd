@@ -1,0 +1,53 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:1f2d3c4b-5a69-4788-9101-112131415161",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-14T07:15:04Z",
+    "tools": [
+      {
+        "vendor": "anchore",
+        "name": "syft",
+        "version": "1.20.0"
+      }
+    ],
+    "component": {
+      "bom-ref": "pkg:generic/demo-app@1.0.0",
+      "type": "application",
+      "name": "demo-app",
+      "version": "1.0.0"
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "pkg:golang/golang.org/x/crypto@v0.17.0",
+      "type": "library",
+      "name": "golang.org/x/crypto",
+      "version": "v0.17.0",
+      "purl": "pkg:golang/golang.org/x/crypto@v0.17.0"
+    },
+    {
+      "bom-ref": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+      "type": "library",
+      "group": "org.apache.logging.log4j",
+      "name": "log4j-core",
+      "version": "2.14.1",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+    },
+    {
+      "bom-ref": "pkg:npm/lodash@4.17.15",
+      "type": "library",
+      "name": "lodash",
+      "version": "4.17.15",
+      "purl": "pkg:npm/lodash@4.17.15"
+    },
+    {
+      "bom-ref": "pkg:pypi/requests@2.25.0",
+      "type": "library",
+      "name": "requests",
+      "version": "2.25.0",
+      "purl": "pkg:pypi/requests@2.25.0"
+    }
+  ]
+}

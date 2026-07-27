@@ -1,0 +1,675 @@
+{
+ "matches": [
+  {
+   "vulnerability": {
+    "id": "GHSA-v778-237x-gjrc",
+    "dataSource": "https://github.com/advisories/GHSA-v778-237x-gjrc",
+    "namespace": "github:language:go",
+    "severity": "Critical",
+    "urls": [
+     "https://github.com/advisories/GHSA-v778-237x-gjrc"
+    ],
+    "description": "Misuse of ServerConfig.PublicKeyCallback may cause authorization bypass in golang.org/x/crypto",
+    "cvss": [
+     {
+      "source": "github",
+      "type": "Primary",
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+      "metrics": {
+       "baseScore": 9.1
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "epss": [
+     {
+      "cve": "CVE-2024-45337",
+      "epss": 0.0055,
+      "percentile": 0.66418,
+      "date": "2026-07-13"
+     }
+    ],
+    "fix": {
+     "versions": [
+      "0.31.0"
+     ],
+     "state": "fixed"
+    },
+    "advisories": [],
+    "risk": 4.2
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2024-45337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2024-45337",
+     "namespace": "nvd:cpe",
+     "severity": "Critical",
+     "urls": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2024-45337"
+     ],
+     "description": "Applications and libraries which misuse connection.serverAuthenticate (via callback field ServerConfig.PublicKeyCallback) may be susceptible to an authorization bypass. PublicKeyCallback may be called with multiple keys, and the order in which the keys were provided cannot be used to infer which key the client successfully authenticated with, if any.",
+     "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+       "metrics": {
+        "baseScore": 9.1,
+        "exploitabilityScore": 3.9,
+        "impactScore": 5.2
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-direct-match",
+     "matcher": "go-module-matcher",
+     "searchedBy": {
+      "language": "go",
+      "namespace": "github:language:go",
+      "package": {
+       "name": "golang.org/x/crypto",
+       "version": "v0.17.0"
+      }
+     },
+     "found": {
+      "versionConstraint": "< 0.31.0 (unknown)",
+      "vulnerabilityID": "GHSA-v778-237x-gjrc"
+     },
+     "fix": {
+      "suggestedVersion": "0.31.0"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "54df974e3abf27ad",
+    "name": "golang.org/x/crypto",
+    "version": "v0.17.0",
+    "type": "go-module",
+    "locations": [
+     {
+      "path": "/app/go.mod",
+      "accessPath": "/app/go.mod"
+     }
+    ],
+    "language": "go",
+    "licenses": [],
+    "cpes": [],
+    "purl": "pkg:golang/golang.org/x/crypto@v0.17.0",
+    "upstreams": []
+   }
+  },
+  {
+   "vulnerability": {
+    "id": "GHSA-jfh8-c2jp-5v3q",
+    "dataSource": "https://github.com/advisories/GHSA-jfh8-c2jp-5v3q",
+    "namespace": "github:language:java",
+    "severity": "Critical",
+    "urls": [
+     "https://github.com/advisories/GHSA-jfh8-c2jp-5v3q"
+    ],
+    "description": "Remote code injection in Log4j",
+    "cvss": [
+     {
+      "source": "github",
+      "type": "Primary",
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+      "metrics": {
+       "baseScore": 10.0
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "knownExploited": [
+     {
+      "cve": "CVE-2021-44228",
+      "vendorProject": "Apache",
+      "product": "Log4j2",
+      "dateAdded": "2021-12-10",
+      "requiredAction": "For all affected software assets for which updates exist, the only acceptable remediation actions are: 1) Apply updates; OR 2) remove affected assets from agency networks.",
+      "dueDate": "2021-12-24",
+      "knownRansomwareCampaignUse": "Known",
+      "urls": [
+       "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+      ],
+      "cwes": [
+       "CWE-20",
+       "CWE-400",
+       "CWE-502"
+      ]
+     }
+    ],
+    "epss": [
+     {
+      "cve": "CVE-2021-44228",
+      "epss": 0.97565,
+      "percentile": 0.99989,
+      "date": "2026-07-13"
+     }
+    ],
+    "fix": {
+     "versions": [
+      "2.15.0"
+     ],
+     "state": "fixed"
+    },
+    "advisories": [],
+    "risk": 99.6
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2021-44228",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228",
+     "namespace": "nvd:cpe",
+     "severity": "Critical",
+     "urls": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+     ],
+     "description": "Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled.",
+     "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+       "metrics": {
+        "baseScore": 10.0,
+        "exploitabilityScore": 3.9,
+        "impactScore": 6.0
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-direct-match",
+     "matcher": "java-matcher",
+     "searchedBy": {
+      "language": "java",
+      "namespace": "github:language:java",
+      "package": {
+       "name": "log4j-core",
+       "version": "2.14.1"
+      }
+     },
+     "found": {
+      "versionConstraint": ">=2.13.0,<2.15.0 (maven)",
+      "vulnerabilityID": "GHSA-jfh8-c2jp-5v3q"
+     },
+     "fix": {
+      "suggestedVersion": "2.15.0"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "27620e88ddaca143",
+    "name": "log4j-core",
+    "version": "2.14.1",
+    "type": "java-archive",
+    "locations": [
+     {
+      "path": "/app/lib/log4j-core-2.14.1.jar",
+      "accessPath": "/app/lib/log4j-core-2.14.1.jar"
+     }
+    ],
+    "language": "java",
+    "licenses": [
+     "Apache-2.0"
+    ],
+    "cpes": [
+     "cpe:2.3:a:apache:log4j:2.14.1:*:*:*:*:*:*:*"
+    ],
+    "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+    "upstreams": []
+   }
+  },
+  {
+   "vulnerability": {
+    "id": "GHSA-7rjr-3q55-vv33",
+    "dataSource": "https://github.com/advisories/GHSA-7rjr-3q55-vv33",
+    "namespace": "github:language:java",
+    "severity": "Critical",
+    "urls": [
+     "https://github.com/advisories/GHSA-7rjr-3q55-vv33"
+    ],
+    "description": "Incomplete fix for Apache Log4j vulnerability",
+    "cvss": [
+     {
+      "source": "github",
+      "type": "Primary",
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+      "metrics": {
+       "baseScore": 9.0
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "epss": [
+     {
+      "cve": "CVE-2021-45046",
+      "epss": 0.94586,
+      "percentile": 0.99897,
+      "date": "2026-07-13"
+     }
+    ],
+    "fix": {
+     "versions": [
+      "2.16.0"
+     ],
+     "state": "fixed"
+    },
+    "advisories": [],
+    "risk": 93.1
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2021-45046",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-45046",
+     "namespace": "nvd:cpe",
+     "severity": "Critical",
+     "urls": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2021-45046"
+     ],
+     "description": "It was found that the fix to address CVE-2021-44228 in Apache Log4j 2.15.0 was incomplete in certain non-default configurations. This could allow attackers with control over Thread Context Map (MDC) input data to craft malicious input data using a JNDI Lookup pattern, resulting in an information leak and remote code execution in some environments.",
+     "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+       "metrics": {
+        "baseScore": 9.0,
+        "exploitabilityScore": 2.2,
+        "impactScore": 6.0
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-direct-match",
+     "matcher": "java-matcher",
+     "searchedBy": {
+      "language": "java",
+      "namespace": "github:language:java",
+      "package": {
+       "name": "log4j-core",
+       "version": "2.14.1"
+      }
+     },
+     "found": {
+      "versionConstraint": ">=2.13.0,<2.16.0 (maven)",
+      "vulnerabilityID": "GHSA-7rjr-3q55-vv33"
+     },
+     "fix": {
+      "suggestedVersion": "2.16.0"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "27620e88ddaca143",
+    "name": "log4j-core",
+    "version": "2.14.1",
+    "type": "java-archive",
+    "locations": [
+     {
+      "path": "/app/lib/log4j-core-2.14.1.jar",
+      "accessPath": "/app/lib/log4j-core-2.14.1.jar"
+     }
+    ],
+    "language": "java",
+    "licenses": [
+     "Apache-2.0"
+    ],
+    "cpes": [
+     "cpe:2.3:a:apache:log4j:2.14.1:*:*:*:*:*:*:*"
+    ],
+    "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+    "upstreams": []
+   }
+  },
+  {
+   "vulnerability": {
+    "id": "GHSA-p6mc-m468-83gw",
+    "dataSource": "https://github.com/advisories/GHSA-p6mc-m468-83gw",
+    "namespace": "github:language:javascript",
+    "severity": "High",
+    "urls": [
+     "https://github.com/advisories/GHSA-p6mc-m468-83gw"
+    ],
+    "description": "Prototype Pollution in lodash",
+    "cvss": [
+     {
+      "source": "github",
+      "type": "Primary",
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+      "metrics": {
+       "baseScore": 7.4
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "epss": [
+     {
+      "cve": "CVE-2020-8203",
+      "epss": 0.02997,
+      "percentile": 0.90627,
+      "date": "2026-07-13"
+     }
+    ],
+    "fix": {
+     "versions": [
+      "4.17.19"
+     ],
+     "state": "fixed"
+    },
+    "advisories": [],
+    "risk": 1.8
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2020-8203",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2020-8203",
+     "namespace": "nvd:cpe",
+     "severity": "High",
+     "urls": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2020-8203"
+     ],
+     "description": "Prototype pollution attack when using _.zipObjectDeep in lodash before 4.17.20.",
+     "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+       "metrics": {
+        "baseScore": 7.4,
+        "exploitabilityScore": 2.2,
+        "impactScore": 5.2
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-direct-match",
+     "matcher": "javascript-matcher",
+     "searchedBy": {
+      "language": "javascript",
+      "namespace": "github:language:javascript",
+      "package": {
+       "name": "lodash",
+       "version": "4.17.15"
+      }
+     },
+     "found": {
+      "versionConstraint": ">=3.7.0,<4.17.19 (unknown)",
+      "vulnerabilityID": "GHSA-p6mc-m468-83gw"
+     },
+     "fix": {
+      "suggestedVersion": "4.17.19"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "fc22e3b035d7471a",
+    "name": "lodash",
+    "version": "4.17.15",
+    "type": "npm",
+    "locations": [
+     {
+      "path": "/app/node_modules/lodash/package.json",
+      "accessPath": "/app/node_modules/lodash/package.json"
+     }
+    ],
+    "language": "javascript",
+    "licenses": [
+     "MIT"
+    ],
+    "cpes": [],
+    "purl": "pkg:npm/lodash@4.17.15",
+    "upstreams": []
+   }
+  },
+  {
+   "vulnerability": {
+    "id": "GHSA-35jh-r3h4-6jhm",
+    "dataSource": "https://github.com/advisories/GHSA-35jh-r3h4-6jhm",
+    "namespace": "github:language:javascript",
+    "severity": "High",
+    "urls": [
+     "https://github.com/advisories/GHSA-35jh-r3h4-6jhm"
+    ],
+    "description": "Command Injection in lodash",
+    "cvss": [
+     {
+      "source": "github",
+      "type": "Primary",
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+      "metrics": {
+       "baseScore": 7.2
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "epss": [
+     {
+      "cve": "CVE-2021-23337",
+      "epss": 0.05235,
+      "percentile": 0.92766,
+      "date": "2026-07-13"
+     }
+    ],
+    "fix": {
+     "versions": [
+      "4.17.21"
+     ],
+     "state": "fixed"
+    },
+    "advisories": [],
+    "risk": 3.1
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2021-23337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-23337",
+     "namespace": "nvd:cpe",
+     "severity": "High",
+     "urls": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2021-23337"
+     ],
+     "description": "Lodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function.",
+     "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+       "metrics": {
+        "baseScore": 7.2,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-direct-match",
+     "matcher": "javascript-matcher",
+     "searchedBy": {
+      "language": "javascript",
+      "namespace": "github:language:javascript",
+      "package": {
+       "name": "lodash",
+       "version": "4.17.15"
+      }
+     },
+     "found": {
+      "versionConstraint": "<4.17.21 (unknown)",
+      "vulnerabilityID": "GHSA-35jh-r3h4-6jhm"
+     },
+     "fix": {
+      "suggestedVersion": "4.17.21"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "fc22e3b035d7471a",
+    "name": "lodash",
+    "version": "4.17.15",
+    "type": "npm",
+    "locations": [
+     {
+      "path": "/app/node_modules/lodash/package.json",
+      "accessPath": "/app/node_modules/lodash/package.json"
+     }
+    ],
+    "language": "javascript",
+    "licenses": [
+     "MIT"
+    ],
+    "cpes": [],
+    "purl": "pkg:npm/lodash@4.17.15",
+    "upstreams": []
+   }
+  },
+  {
+   "vulnerability": {
+    "id": "GHSA-j8r2-6x86-q33q",
+    "dataSource": "https://github.com/advisories/GHSA-j8r2-6x86-q33q",
+    "namespace": "github:language:python",
+    "severity": "Medium",
+    "urls": [
+     "https://github.com/advisories/GHSA-j8r2-6x86-q33q"
+    ],
+    "description": "Unintended leak of Proxy-Authorization header in requests",
+    "cvss": [
+     {
+      "source": "github",
+      "type": "Primary",
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:N/A:N",
+      "metrics": {
+       "baseScore": 6.1
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "epss": [
+     {
+      "cve": "CVE-2023-32681",
+      "epss": 0.00181,
+      "percentile": 0.53789,
+      "date": "2026-07-13"
+     }
+    ],
+    "fix": {
+     "versions": [
+      "2.31.0"
+     ],
+     "state": "fixed"
+    },
+    "advisories": [],
+    "risk": 0.11
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2023-32681",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-32681",
+     "namespace": "nvd:cpe",
+     "severity": "Medium",
+     "urls": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2023-32681"
+     ],
+     "description": "Requests is a HTTP library. Since Requests 2.3.0, Requests has been leaking Proxy-Authorization headers to destination servers when redirected to an HTTPS endpoint. This issue has been patched in version 2.31.0.",
+     "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:N/A:N",
+       "metrics": {
+        "baseScore": 6.1,
+        "exploitabilityScore": 1.6,
+        "impactScore": 4.0
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-direct-match",
+     "matcher": "python-matcher",
+     "searchedBy": {
+      "language": "python",
+      "namespace": "github:language:python",
+      "package": {
+       "name": "requests",
+       "version": "2.25.0"
+      }
+     },
+     "found": {
+      "versionConstraint": "<2.31.0 (python)",
+      "vulnerabilityID": "GHSA-j8r2-6x86-q33q"
+     },
+     "fix": {
+      "suggestedVersion": "2.31.0"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "a25b19d17cfaa5a6",
+    "name": "requests",
+    "version": "2.25.0",
+    "type": "python",
+    "locations": [
+     {
+      "path": "/app/venv/lib/python3.9/site-packages/requests-2.25.0.dist-info/METADATA",
+      "accessPath": "/app/venv/lib/python3.9/site-packages/requests-2.25.0.dist-info/METADATA"
+     }
+    ],
+    "language": "python",
+    "licenses": [
+     "Apache-2.0"
+    ],
+    "cpes": [],
+    "purl": "pkg:pypi/requests@2.25.0",
+    "upstreams": []
+   }
+  }
+ ],
+ "source": {
+  "type": "sbom",
+  "target": "./sbom.cdx.json"
+ },
+ "distro": {
+  "name": "",
+  "version": "",
+  "idLike": null
+ },
+ "descriptor": {
+  "name": "grype",
+  "version": "0.115.0",
+  "timestamp": "2026-07-14T09:15:04.783651289+02:00"
+ }
+}

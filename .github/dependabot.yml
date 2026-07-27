@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 ByteRay Ltd.
+
+version: 2
+updates:
+  # The CLI module. Keep copilot-sdk/go pinned by hand: the SDK speaks a
+  # versioned protocol against the Copilot CLI pinned in the Dockerfile, and
+  # the two have to move together.
+  - package-ecosystem: gomod
+    directory: /cmd/xpsd
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: github.com/github/copilot-sdk/go
+
+  - package-ecosystem: gomod
+    directory: /tools/mcp-server/src
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
