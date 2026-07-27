@@ -1,0 +1,295 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "grype",
+          "version": "0.115.0",
+          "informationUri": "https://github.com/anchore/grype",
+          "rules": [
+            {
+              "id": "GHSA-v778-237x-gjrc-golang.org/x/crypto",
+              "name": "GoModuleMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-v778-237x-gjrc critical vulnerability for golang.org/x/crypto package"
+              },
+              "fullDescription": {
+                "text": "Misuse of ServerConfig.PublicKeyCallback may cause authorization bypass in golang.org/x/crypto"
+              },
+              "helpUri": "https://github.com/advisories/GHSA-v778-237x-gjrc",
+              "help": {
+                "text": "Vulnerability GHSA-v778-237x-gjrc\nSeverity: critical\nPackage: golang.org/x/crypto\nVersion: v0.17.0\nFix Version: 0.31.0\nType: go-module\nLocation: /app/go.mod\nData Namespace: github:language:go\nLink: [GHSA-v778-237x-gjrc](https://github.com/advisories/GHSA-v778-237x-gjrc)",
+                "markdown": "**Vulnerability GHSA-v778-237x-gjrc**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| critical  | golang.org/x/crypto  | v0.17.0  | 0.31.0  | go-module  | /app/go.mod  | github:language:go  | [GHSA-v778-237x-gjrc](https://github.com/advisories/GHSA-v778-237x-gjrc)  |\n"
+              },
+              "properties": {
+                "purls": [
+                  "pkg:golang/golang.org/x/crypto@v0.17.0"
+                ],
+                "security-severity": "9.1"
+              }
+            },
+            {
+              "id": "GHSA-jfh8-c2jp-5v3q-log4j-core",
+              "name": "JavaMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-jfh8-c2jp-5v3q critical vulnerability for log4j-core package"
+              },
+              "fullDescription": {
+                "text": "Remote code injection in Log4j"
+              },
+              "helpUri": "https://github.com/advisories/GHSA-jfh8-c2jp-5v3q",
+              "help": {
+                "text": "Vulnerability GHSA-jfh8-c2jp-5v3q\nSeverity: critical\nPackage: log4j-core\nVersion: 2.14.1\nFix Version: 2.15.0\nType: java-archive\nLocation: /app/lib/log4j-core-2.14.1.jar\nData Namespace: github:language:java\nLink: [GHSA-jfh8-c2jp-5v3q](https://github.com/advisories/GHSA-jfh8-c2jp-5v3q)",
+                "markdown": "**Vulnerability GHSA-jfh8-c2jp-5v3q**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| critical  | log4j-core  | 2.14.1  | 2.15.0  | java-archive  | /app/lib/log4j-core-2.14.1.jar  | github:language:java  | [GHSA-jfh8-c2jp-5v3q](https://github.com/advisories/GHSA-jfh8-c2jp-5v3q)  |\n"
+              },
+              "properties": {
+                "purls": [
+                  "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+                ],
+                "security-severity": "10.0"
+              }
+            },
+            {
+              "id": "GHSA-7rjr-3q55-vv33-log4j-core",
+              "name": "JavaMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-7rjr-3q55-vv33 critical vulnerability for log4j-core package"
+              },
+              "fullDescription": {
+                "text": "Incomplete fix for Apache Log4j vulnerability"
+              },
+              "helpUri": "https://github.com/advisories/GHSA-7rjr-3q55-vv33",
+              "help": {
+                "text": "Vulnerability GHSA-7rjr-3q55-vv33\nSeverity: critical\nPackage: log4j-core\nVersion: 2.14.1\nFix Version: 2.16.0\nType: java-archive\nLocation: /app/lib/log4j-core-2.14.1.jar\nData Namespace: github:language:java\nLink: [GHSA-7rjr-3q55-vv33](https://github.com/advisories/GHSA-7rjr-3q55-vv33)",
+                "markdown": "**Vulnerability GHSA-7rjr-3q55-vv33**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| critical  | log4j-core  | 2.14.1  | 2.16.0  | java-archive  | /app/lib/log4j-core-2.14.1.jar  | github:language:java  | [GHSA-7rjr-3q55-vv33](https://github.com/advisories/GHSA-7rjr-3q55-vv33)  |\n"
+              },
+              "properties": {
+                "purls": [
+                  "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "GHSA-p6mc-m468-83gw-lodash",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-p6mc-m468-83gw high vulnerability for lodash package"
+              },
+              "fullDescription": {
+                "text": "Prototype Pollution in lodash"
+              },
+              "helpUri": "https://github.com/advisories/GHSA-p6mc-m468-83gw",
+              "help": {
+                "text": "Vulnerability GHSA-p6mc-m468-83gw\nSeverity: high\nPackage: lodash\nVersion: 4.17.15\nFix Version: 4.17.19\nType: npm\nLocation: /app/node_modules/lodash/package.json\nData Namespace: github:language:javascript\nLink: [GHSA-p6mc-m468-83gw](https://github.com/advisories/GHSA-p6mc-m468-83gw)",
+                "markdown": "**Vulnerability GHSA-p6mc-m468-83gw**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | lodash  | 4.17.15  | 4.17.19  | npm  | /app/node_modules/lodash/package.json  | github:language:javascript  | [GHSA-p6mc-m468-83gw](https://github.com/advisories/GHSA-p6mc-m468-83gw)  |\n"
+              },
+              "properties": {
+                "purls": [
+                  "pkg:npm/lodash@4.17.15"
+                ],
+                "security-severity": "7.4"
+              }
+            },
+            {
+              "id": "GHSA-35jh-r3h4-6jhm-lodash",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-35jh-r3h4-6jhm high vulnerability for lodash package"
+              },
+              "fullDescription": {
+                "text": "Command Injection in lodash"
+              },
+              "helpUri": "https://github.com/advisories/GHSA-35jh-r3h4-6jhm",
+              "help": {
+                "text": "Vulnerability GHSA-35jh-r3h4-6jhm\nSeverity: high\nPackage: lodash\nVersion: 4.17.15\nFix Version: 4.17.21\nType: npm\nLocation: /app/node_modules/lodash/package.json\nData Namespace: github:language:javascript\nLink: [GHSA-35jh-r3h4-6jhm](https://github.com/advisories/GHSA-35jh-r3h4-6jhm)",
+                "markdown": "**Vulnerability GHSA-35jh-r3h4-6jhm**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | lodash  | 4.17.15  | 4.17.21  | npm  | /app/node_modules/lodash/package.json  | github:language:javascript  | [GHSA-35jh-r3h4-6jhm](https://github.com/advisories/GHSA-35jh-r3h4-6jhm)  |\n"
+              },
+              "properties": {
+                "purls": [
+                  "pkg:npm/lodash@4.17.15"
+                ],
+                "security-severity": "7.2"
+              }
+            },
+            {
+              "id": "GHSA-j8r2-6x86-q33q-requests",
+              "name": "PythonMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-j8r2-6x86-q33q medium vulnerability for requests package"
+              },
+              "fullDescription": {
+                "text": "Unintended leak of Proxy-Authorization header in requests"
+              },
+              "helpUri": "https://github.com/advisories/GHSA-j8r2-6x86-q33q",
+              "help": {
+                "text": "Vulnerability GHSA-j8r2-6x86-q33q\nSeverity: medium\nPackage: requests\nVersion: 2.25.0\nFix Version: 2.31.0\nType: python\nLocation: /app/venv/lib/python3.9/site-packages/requests-2.25.0.dist-info/METADATA\nData Namespace: github:language:python\nLink: [GHSA-j8r2-6x86-q33q](https://github.com/advisories/GHSA-j8r2-6x86-q33q)",
+                "markdown": "**Vulnerability GHSA-j8r2-6x86-q33q**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | requests  | 2.25.0  | 2.31.0  | python  | /app/venv/lib/python3.9/site-packages/requests-2.25.0.dist-info/METADATA  | github:language:python  | [GHSA-j8r2-6x86-q33q](https://github.com/advisories/GHSA-j8r2-6x86-q33q)  |\n"
+              },
+              "properties": {
+                "purls": [
+                  "pkg:pypi/requests@2.25.0"
+                ],
+                "security-severity": "6.1"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "GHSA-v778-237x-gjrc-golang.org/x/crypto",
+          "level": "error",
+          "message": {
+            "text": "A critical vulnerability in go-module package: golang.org/x/crypto, version v0.17.0 was found from SBOM file ./sbom.cdx.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/app/go.mod"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "0c15e902accab69aa13a4a54acdfac7d388be98db9d5e9a6bd3356116fa28ebb:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-jfh8-c2jp-5v3q-log4j-core",
+          "level": "error",
+          "message": {
+            "text": "A critical vulnerability in java-archive package: log4j-core, version 2.14.1 was found from SBOM file ./sbom.cdx.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/app/lib/log4j-core-2.14.1.jar"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "3bcebdc959dc206d686da8d2ffd29828dc51519c3658273854de8f56f7c09ac8:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-7rjr-3q55-vv33-log4j-core",
+          "level": "error",
+          "message": {
+            "text": "A critical vulnerability in java-archive package: log4j-core, version 2.14.1 was found from SBOM file ./sbom.cdx.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/app/lib/log4j-core-2.14.1.jar"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "3bcebdc959dc206d686da8d2ffd29828dc51519c3658273854de8f56f7c09ac8:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-p6mc-m468-83gw-lodash",
+          "level": "error",
+          "message": {
+            "text": "A high vulnerability in npm package: lodash, version 4.17.15 was found from SBOM file ./sbom.cdx.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/app/node_modules/lodash/package.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "538d6bd08a5c0dc8ed63c3c150d536cb36556d22dfede1833cbab2c54647ba4b:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-35jh-r3h4-6jhm-lodash",
+          "level": "error",
+          "message": {
+            "text": "A high vulnerability in npm package: lodash, version 4.17.15 was found from SBOM file ./sbom.cdx.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/app/node_modules/lodash/package.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "538d6bd08a5c0dc8ed63c3c150d536cb36556d22dfede1833cbab2c54647ba4b:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-j8r2-6x86-q33q-requests",
+          "level": "warning",
+          "message": {
+            "text": "A medium vulnerability in python package: requests, version 2.25.0 was found from SBOM file ./sbom.cdx.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/app/venv/lib/python3.9/site-packages/requests-2.25.0.dist-info/METADATA"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "84cd68fef1fd3227d5557d391856509303c0e77bc8c101f9218b040957733e1a:1"
+          }
+        }
+      ]
+    }
+  ]
+}

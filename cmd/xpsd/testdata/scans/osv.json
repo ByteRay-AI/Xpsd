@@ -1,0 +1,486 @@
+{
+  "results": [
+    {
+      "source": {
+        "path": "/scan/sbom.cdx.json",
+        "type": "sbom"
+      },
+      "packages": [
+        {
+          "package": {
+            "name": "golang.org/x/crypto",
+            "version": "0.17.0",
+            "ecosystem": "Go"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-hcg3-q754-cr77"
+              ],
+              "aliases": [
+                "CVE-2025-22869",
+                "GHSA-hcg3-q754-cr77",
+                "GO-2025-3487"
+              ],
+              "max_severity": "7.5"
+            },
+            {
+              "ids": [
+                "GHSA-v778-237x-gjrc"
+              ],
+              "aliases": [
+                "CVE-2024-45337",
+                "GHSA-v778-237x-gjrc",
+                "GO-2024-3321"
+              ],
+              "max_severity": "9.1"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/04/GHSA-hcg3-q754-cr77/GHSA-hcg3-q754-cr77.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "golang.org/x/crypto",
+                    "purl": "pkg:golang/golang.org/x/crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.35.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-22869",
+                "GO-2025-3487"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-770"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2025-04-14T15:38:58Z",
+                "nvd_published_at": "2025-02-26T08:14:24Z",
+                "severity": "HIGH"
+              },
+              "details": "SSH servers which implement file transfer protocols are vulnerable to a denial of service attack from clients which complete the key exchange slowly, or not at all, causing pending content to be read into memory, but never transmitted.",
+              "id": "GHSA-hcg3-q754-cr77",
+              "modified": "2026-02-05T01:28:51.111278Z",
+              "published": "2025-04-12T00:30:26Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-22869"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/golang/crypto/commit/7292932d45d55c7199324ab0027cc86e8198aa22"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/golang/crypto"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://go.dev/issue/71931"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://pkg.go.dev/vuln/GO-2025-3487"
+                }
+              ],
+              "related": [
+                "CGA-299c-rxpx-5x42"
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "golang.org/x/crypto Vulnerable to Denial of Service (DoS) via Slow or Incomplete Key Exchange"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/12/GHSA-v778-237x-gjrc/GHSA-v778-237x-gjrc.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "golang.org/x/crypto",
+                    "purl": "pkg:golang/golang.org/x/crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.31.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2024-45337",
+                "GO-2024-3321"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-285"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2024-12-11T22:03:04Z",
+                "nvd_published_at": "2024-12-12T02:02:07Z",
+                "severity": "CRITICAL"
+              },
+              "details": "Applications and libraries which misuse the ServerConfig.PublicKeyCallback callback may be susceptible to an authorization bypass.\n\nThe documentation for ServerConfig.PublicKeyCallback says that \"A call to this function does not guarantee that the key offered is in fact used to authenticate.\" Specifically, the SSH protocol allows clients to inquire about whether a public key is acceptable before proving control of the corresponding private key.",
+              "id": "GHSA-v778-237x-gjrc",
+              "modified": "2026-02-05T02:28:51.578301Z",
+              "published": "2024-12-11T22:03:04Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-45337"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/golang/crypto/commit/b4f1988a35dee11ec3e05d6bf3e90b695fbd8909"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/golang/crypto"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://go.dev/issue/70779"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://pkg.go.dev/vuln/GO-2024-3321"
+                }
+              ],
+              "related": [
+                "CGA-4v8q-2mqp-2558"
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Misuse of ServerConfig.PublicKeyCallback may cause authorization bypass in golang.org/x/crypto"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "lodash",
+            "version": "4.17.15",
+            "ecosystem": "npm"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-p6mc-m468-83gw"
+              ],
+              "aliases": [
+                "CVE-2020-8203",
+                "GHSA-p6mc-m468-83gw"
+              ],
+              "max_severity": "7.4"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2020/07/GHSA-p6mc-m468-83gw/GHSA-p6mc-m468-83gw.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "lodash",
+                    "purl": "pkg:npm/lodash"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "3.7.0"
+                        },
+                        {
+                          "fixed": "4.17.19"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2020-8203"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-1321",
+                  "CWE-770"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2020-07-15T19:14:58Z",
+                "nvd_published_at": "2020-07-15T17:15:00Z",
+                "severity": "HIGH"
+              },
+              "details": "Versions of lodash prior to 4.17.19 are vulnerable to Prototype Pollution. The functions `pick`, `set`, `setWith`, `update`, `updateWith`, and `zipObjectDeep` allow a malicious user to modify the prototype of Object if the property identifiers are user-supplied. Being affected by this issue requires manipulating objects based on user-provided property values or arrays.\n\nThis vulnerability causes the addition or modification of an existing property that will exist on all objects and may lead to Denial of Service or Code Execution under specific circumstances.",
+              "id": "GHSA-p6mc-m468-83gw",
+              "modified": "2025-08-12T21:56:17.174859Z",
+              "published": "2020-07-15T19:15:48Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-8203"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/lodash/lodash/issues/4744"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/lodash/lodash/commit/c84fe82760fb2d3e03a63379b297a1cc1a2fce12"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://hackerone.com/reports/712065"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/lodash/lodash"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Prototype Pollution in lodash"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "org.apache.logging.log4j:log4j-core",
+            "version": "2.14.1",
+            "ecosystem": "Maven"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-7rjr-3q55-vv33"
+              ],
+              "aliases": [
+                "CVE-2021-45046",
+                "GHSA-7rjr-3q55-vv33"
+              ],
+              "max_severity": "9.0"
+            },
+            {
+              "ids": [
+                "GHSA-jfh8-c2jp-5v3q"
+              ],
+              "aliases": [
+                "CVE-2021-44228",
+                "GHSA-jfh8-c2jp-5v3q"
+              ],
+              "max_severity": "10.0"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2021/12/GHSA-7rjr-3q55-vv33/GHSA-7rjr-3q55-vv33.json"
+                  },
+                  "package": {
+                    "ecosystem": "Maven",
+                    "name": "org.apache.logging.log4j:log4j-core",
+                    "purl": "pkg:maven/org.apache.logging.log4j/log4j-core"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "2.13.0"
+                        },
+                        {
+                          "fixed": "2.16.0"
+                        }
+                      ],
+                      "type": "ECOSYSTEM"
+                    }
+                  ],
+                  "versions": [
+                    "2.13.0",
+                    "2.13.1",
+                    "2.13.2",
+                    "2.13.3",
+                    "2.14.0",
+                    "2.14.1",
+                    "2.15.0"
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2021-45046"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-502",
+                  "CWE-917"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2021-12-14T17:55:00Z",
+                "nvd_published_at": "2021-12-14T19:15:00Z",
+                "severity": "CRITICAL"
+              },
+              "details": "# Impact\n\nThe fix to address [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) in Apache Log4j 2.15.0 was incomplete in certain non-default configurations. This could allow attackers with control over Thread Context Map (MDC) input data when the logging configuration uses a non-default Pattern Layout with either a Context Lookup (for example, $${ctx:loginId}) or a Thread Context Map pattern (%X, %mdc, or %MDC) to craft malicious input data using a JNDI Lookup pattern resulting in a remote code execution (RCE) attack. ",
+              "id": "GHSA-7rjr-3q55-vv33",
+              "modified": "2025-10-22T19:37:53.742023Z",
+              "published": "2021-12-14T18:01:28Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-45046"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.openwall.com/lists/oss-security/2021/12/14/4"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://logging.apache.org/log4j/2.x/security.html"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://www.cve.org/CVERecord?id=CVE-2021-44228"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/E:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Incomplete fix for Apache Log4j vulnerability"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2021/12/GHSA-jfh8-c2jp-5v3q/GHSA-jfh8-c2jp-5v3q.json"
+                  },
+                  "package": {
+                    "ecosystem": "Maven",
+                    "name": "org.apache.logging.log4j:log4j-core",
+                    "purl": "pkg:maven/org.apache.logging.log4j/log4j-core"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "2.13.0"
+                        },
+                        {
+                          "fixed": "2.15.0"
+                        }
+                      ],
+                      "type": "ECOSYSTEM"
+                    }
+                  ],
+                  "versions": [
+                    "2.13.0",
+                    "2.13.1",
+                    "2.13.2",
+                    "2.13.3",
+                    "2.14.0",
+                    "2.14.1"
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2021-44228"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-20",
+                  "CWE-400",
+                  "CWE-502",
+                  "CWE-917"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2021-12-10T00:40:41Z",
+                "nvd_published_at": "2021-12-10T10:15:00Z",
+                "severity": "CRITICAL"
+              },
+              "details": "# Summary\n\nLog4j versions prior to 2.16.0 are subject to a remote code execution vulnerability via the ldap JNDI parser.\nAs per [Apache's Log4j security guide](https://logging.apache.org/log4j/2.x/security.html): Apache Log4j2 <=2.14.1 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled.",
+              "id": "GHSA-jfh8-c2jp-5v3q",
+              "modified": "2025-10-22T19:37:02.616807Z",
+              "published": "2021-12-10T00:40:56Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/apache/logging-log4j2/pull/608"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://logging.apache.org/log4j/2.x/security.html"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Remote code injection in Log4j"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "experimental_config": {
+    "licenses": {
+      "summary": false,
+      "allowlist": null
+    }
+  }
+}

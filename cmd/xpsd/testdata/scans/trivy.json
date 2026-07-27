@@ -1,0 +1,428 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.72.0"
+  },
+  "ReportID": "019f5fc9-a1aa-7000-80ea-000000000001",
+  "CreatedAt": "2026-07-14T08:41:17.482196453Z",
+  "ArtifactName": "app.cdx.json",
+  "ArtifactType": "cyclonedx",
+  "Results": [
+    {
+      "Target": "go.mod",
+      "Class": "lang-pkgs",
+      "Type": "gomod",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2024-45337",
+          "PkgID": "golang.org/x/crypto@v0.17.0",
+          "PkgName": "golang.org/x/crypto",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/golang.org/x/crypto@v0.17.0",
+            "UID": "b71b6b1f2a53d1c8",
+            "BOMRef": "pkg:golang/golang.org/x/crypto@v0.17.0"
+          },
+          "InstalledVersion": "v0.17.0",
+          "FixedVersion": "0.31.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-45337",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Fingerprint": "sha256:1f7a4f13b91a9a37ef2e4acbcbec8e4e18bd6d5325a4bc4a0f95bcafa4c1a86d",
+          "Title": "golang.org/x/crypto/ssh: Misuse of ServerConfig.PublicKeyCallback may cause authorization bypass in golang.org/x/crypto",
+          "Description": "Applications and libraries which misuse the ServerConfig.PublicKeyCallback callback may be susceptible to an authorization bypass. The documentation for ServerConfig.PublicKeyCallback says that \"A call to this function does not guarantee that the key offered is in fact used to authenticate.\" Specifically, the SSH protocol allows clients to inquire about whether a public key is acceptable before proving control of the corresponding private key. PublicKeyCallback may be called with multiple keys, and the order in which the keys were provided cannot be used to infer which key the client successfully authenticated with, if any. Some applications, which store the key(s) passed to PublicKeyCallback (or derived information) and make security relevant determinations based on it once the connection is established, may make incorrect assumptions. For example, an attacker may send public keys A and B, and then authenticate with A. PublicKeyCallback would be called only twice, first with A and then with B. A vulnerable application may then make authorization decisions based on key B for which the attacker does not actually control the private key. Since this API is widely misused, as a partial mitigation golang.org/x/crypto@v0.31.0 enforces the property that, when successfully authenticating via public key, the last key passed to ServerConfig.PublicKeyCallback will be the key used to authenticate the connection. PublicKeyCallback will now be called multiple times with the same key, if necessary.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-285"
+          ],
+          "VendorSeverity": {
+            "amazon": 4,
+            "ghsa": 4,
+            "nvd": 4,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 9.1
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 9.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 8.1
+            }
+          },
+          "References": [
+            "https://github.com/advisories/GHSA-v778-237x-gjrc",
+            "https://github.com/golang/crypto/commit/b4f1988a35dee11ec3e05d6bf3e90b695fbd8909",
+            "https://go.dev/cl/635315",
+            "https://go.dev/issue/70779",
+            "https://groups.google.com/g/golang-announce/c/-nPEi39gI4Q/m/cGVPJCqdAQAJ",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-45337",
+            "https://pkg.go.dev/vuln/GO-2024-3321"
+          ],
+          "PublishedDate": "2024-12-12T02:15:06Z",
+          "LastModifiedDate": "2025-02-18T21:15:20Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2022-32149",
+          "PkgID": "golang.org/x/text@v0.3.7",
+          "PkgName": "golang.org/x/text",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/golang.org/x/text@v0.3.7",
+            "UID": "8a7c1ea24d5e93f1",
+            "BOMRef": "pkg:golang/golang.org/x/text@v0.3.7"
+          },
+          "InstalledVersion": "v0.3.7",
+          "FixedVersion": "0.3.8",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-32149",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Fingerprint": "sha256:9c40e5e0f3bfa2c1d3b1e8f43aa8d54e9f2f1c62b8e0e6d4c1e5a0d4b8fef421",
+          "Title": "golang: golang.org/x/text/language: ParseAcceptLanguage takes a long time to parse complex tags",
+          "Description": "An attacker may cause a denial of service by crafting an Accept-Language header which ParseAcceptLanguage will take significant time to parse.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-772"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://github.com/advisories/GHSA-69ch-w2m1-3vwq",
+            "https://go.dev/cl/442235",
+            "https://go.dev/issue/56152",
+            "https://groups.google.com/g/golang-announce/c/-hjNw559_tE/m/KlGTfid5CAAJ",
+            "https://nvd.nist.gov/vuln/detail/CVE-2022-32149",
+            "https://pkg.go.dev/vuln/GO-2022-1059"
+          ],
+          "PublishedDate": "2022-10-14T15:15:34Z",
+          "LastModifiedDate": "2023-11-07T03:47:04Z"
+        }
+      ]
+    },
+    {
+      "Target": "app/lib/log4j-core-2.14.1.jar",
+      "Class": "lang-pkgs",
+      "Type": "jar",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2021-44228",
+          "PkgID": "org.apache.logging.log4j:log4j-core:2.14.1",
+          "PkgName": "org.apache.logging.log4j:log4j-core",
+          "PkgIdentifier": {
+            "PURL": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+            "UID": "3e1d0e5a9c74b2f6",
+            "BOMRef": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+          },
+          "InstalledVersion": "2.14.1",
+          "FixedVersion": "2.15.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-44228",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Fingerprint": "sha256:dc3b1f2f6a54e8f7c2d4bb9139f0e37c9f1a0eaf25d6dbe4a12a3c7ce15b8d90",
+          "Title": "log4j-core: Remote code execution in Log4j 2.x when logs contain an attacker-controlled string value",
+          "Description": "Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From log4j 2.15.0, this behavior has been disabled by default. From version 2.16.0 (along with 2.12.2, 2.12.3, and 2.3.1), this functionality has been completely removed. Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-20",
+            "CWE-400",
+            "CWE-502",
+            "CWE-917"
+          ],
+          "VendorSeverity": {
+            "amazon": 4,
+            "ghsa": 4,
+            "nvd": 4,
+            "redhat": 4
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+              "V3Score": 10
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+              "V2Score": 9.3,
+              "V3Score": 10
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+              "V3Score": 9.8
+            }
+          },
+          "References": [
+            "https://github.com/advisories/GHSA-jfh8-c2jp-5v3q",
+            "https://github.com/apache/logging-log4j2/pull/608",
+            "https://logging.apache.org/log4j/2.x/security.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-44228",
+            "https://www.cisa.gov/uscert/apache-log4j-vulnerability-guidance",
+            "https://www.lunasec.io/docs/blog/log4j-zero-day/"
+          ],
+          "PublishedDate": "2021-12-10T10:15:09Z",
+          "LastModifiedDate": "2023-11-07T03:39:43Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-45046",
+          "PkgID": "org.apache.logging.log4j:log4j-core:2.14.1",
+          "PkgName": "org.apache.logging.log4j:log4j-core",
+          "PkgIdentifier": {
+            "PURL": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1",
+            "UID": "3e1d0e5a9c74b2f6",
+            "BOMRef": "pkg:maven/org.apache.logging.log4j/log4j-core@2.14.1"
+          },
+          "InstalledVersion": "2.14.1",
+          "FixedVersion": "2.16.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-45046",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Maven",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Amaven"
+          },
+          "Fingerprint": "sha256:5b0e2f81d3a76b7e9c4a1f0d2e8c93b6f47a5d0c1e9b8a3f6d2c4e7a9b1d3f58",
+          "Title": "log4j-core: DoS in log4j 2.x with thread context message pattern and context lookup pattern (incomplete fix for CVE-2021-44228)",
+          "Description": "It was found that the fix to address CVE-2021-44228 in Apache Log4j 2.15.0 was incomplete in certain non-default configurations. This could allows attackers with control over Thread Context Map (MDC) input data when the logging configuration uses a non-default Pattern Layout with either a Context Lookup (for example, $${ctx:loginId}) or a Thread Context Map pattern (%X, %mdc, or %MDC) to craft malicious input data using a JNDI Lookup pattern resulting in an information leak and remote code execution in some environments and local code execution in all environments. Log4j 2.16.0 (Java 8) and 2.12.2 (Java 7) fix this issue by removing support for message lookup patterns and disabling JNDI functionality by default.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-917"
+          ],
+          "VendorSeverity": {
+            "amazon": 4,
+            "ghsa": 4,
+            "nvd": 4,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+              "V3Score": 9
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:H/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+              "V2Score": 5.1,
+              "V3Score": 9
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.1
+            }
+          },
+          "References": [
+            "https://github.com/advisories/GHSA-7rjr-3q55-vv33",
+            "https://lists.apache.org/thread/83y7dx5xvn3h5290q1twn16tltolv88f",
+            "https://logging.apache.org/log4j/2.x/security.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-45046"
+          ],
+          "PublishedDate": "2021-12-14T19:15:07Z",
+          "LastModifiedDate": "2023-11-07T03:39:44Z"
+        }
+      ]
+    },
+    {
+      "Target": "package-lock.json",
+      "Class": "lang-pkgs",
+      "Type": "npm",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2020-8203",
+          "PkgID": "lodash@4.17.15",
+          "PkgName": "lodash",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/lodash@4.17.15",
+            "UID": "c95f2a1e8d640b37",
+            "BOMRef": "pkg:npm/lodash@4.17.15"
+          },
+          "InstalledVersion": "4.17.15",
+          "FixedVersion": "4.17.19",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-8203",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Fingerprint": "sha256:7e4d8c1b0a29f6e3d5c8b2a1f4e0d9c6b3a8e5f2d1c0b9a8e7f6d5c4b3a2e1f0",
+          "Title": "nodejs-lodash: prototype pollution in zipObjectDeep function",
+          "Description": "Prototype pollution attack when using _.zipObjectDeep in lodash before 4.17.20.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-1321"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "nvd": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+              "V3Score": 7.4
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:M/Au:N/C:N/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+              "V2Score": 5.8,
+              "V3Score": 7.4
+            }
+          },
+          "References": [
+            "https://github.com/advisories/GHSA-p6mc-m468-83gw",
+            "https://github.com/lodash/lodash/issues/4744",
+            "https://hackerone.com/reports/712065",
+            "https://nvd.nist.gov/vuln/detail/CVE-2020-8203",
+            "https://security.netapp.com/advisory/ntap-20200724-0006/"
+          ],
+          "PublishedDate": "2020-07-15T17:15:11Z",
+          "LastModifiedDate": "2023-11-07T03:26:11Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-23337",
+          "PkgID": "lodash@4.17.15",
+          "PkgName": "lodash",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/lodash@4.17.15",
+            "UID": "c95f2a1e8d640b37",
+            "BOMRef": "pkg:npm/lodash@4.17.15"
+          },
+          "InstalledVersion": "4.17.15",
+          "FixedVersion": "4.17.21",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-23337",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Fingerprint": "sha256:2a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b",
+          "Title": "nodejs-lodash: command injection via template",
+          "Description": "Lodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-77",
+            "CWE-94"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.2
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:S/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 6.5,
+              "V3Score": 7.2
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.2
+            }
+          },
+          "References": [
+            "https://github.com/advisories/GHSA-35jh-r3h4-6jhm",
+            "https://github.com/lodash/lodash/commit/3469357cff396a26c363f8c1b5a91dde28ba4b1c",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-23337",
+            "https://snyk.io/vuln/SNYK-JS-LODASH-1040724"
+          ],
+          "PublishedDate": "2021-02-15T13:15:12Z",
+          "LastModifiedDate": "2023-11-07T03:38:00Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2021-44906",
+          "PkgID": "minimist@1.2.5",
+          "PkgName": "minimist",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/minimist@1.2.5",
+            "UID": "d4e8b1a0f3c72695",
+            "BOMRef": "pkg:npm/minimist@1.2.5"
+          },
+          "InstalledVersion": "1.2.5",
+          "FixedVersion": "1.2.6",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-44906",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Fingerprint": "sha256:8f3e2d1c0b9a8e7f6d5c4b3a2e1f0d9c8b7a6e5f4d3c2b1a0e9f8d7c6b5a4e3f",
+          "Title": "minimist: prototype pollution",
+          "Description": "Minimist <=1.2.5 is vulnerable to Prototype Pollution via file index.js, function setKey() (lines 69-95).",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-1321"
+          ],
+          "VendorSeverity": {
+            "ghsa": 4,
+            "nvd": 4,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "nvd": {
+              "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V2Score": 7.5,
+              "V3Score": 9.8
+            }
+          },
+          "References": [
+            "https://github.com/advisories/GHSA-xvch-5gv4-984h",
+            "https://github.com/substack/minimist/blob/master/index.js#L69-L95",
+            "https://github.com/substack/minimist/issues/164",
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-44906"
+          ],
+          "PublishedDate": "2022-03-17T16:15:08Z",
+          "LastModifiedDate": "2023-11-07T03:39:47Z"
+        }
+      ]
+    }
+  ]
+}

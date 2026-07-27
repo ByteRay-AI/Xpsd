@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 ByteRay Ltd.
+
+name: publish
+
+on:
+  push:
+    branches: [main]
+    tags:    ['v[0-9]+.[0-9]+.[0-9]+']
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - name: action.yml image must match the tag being released
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          yml_version="$(grep -oP 'image: docker://ghcr\.io/byteray-ai/xpsd:\K\S+' action.yml)"
+          if [ "$tag_version" != "$yml_version" ]; then
+            echo "::error::action.yml pins image :$yml_version but the tag is v$tag_version." \
+                 "Bump the image line in action.yml, then re-tag, or users pinning" \
+                 "@$GITHUB_REF_NAME would silently run a different version."
+            exit 1
+          fi
+          echo "action.yml pins :$yml_version, matching $GITHUB_REF_NAME"
+
+      - uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c  # v4.2.0
+      - uses: docker/login-action@371161bbe7024a29a25c5e19bfcbc0804fe9ad2c  # v4.5.2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302  # v6.2.0
+        id: meta
+        with:
+          images: ghcr.io/byteray-ai/xpsd
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a  # v7.3.0
+        with:
+          context: .
+          push: true
+          build-args: |
+            VERSION=${{ steps.meta.outputs.version }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

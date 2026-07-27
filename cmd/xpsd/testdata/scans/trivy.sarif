@@ -1,0 +1,413 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "fullName": "Trivy Vulnerability Scanner",
+          "informationUri": "https://github.com/aquasecurity/trivy",
+          "name": "Trivy",
+          "rules": [
+            {
+              "id": "CVE-2024-45337",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "golang.org/x/crypto/ssh: Misuse of ServerConfig.PublicKeyCallback may cause authorization bypass in golang.org/x/crypto"
+              },
+              "fullDescription": {
+                "text": "Applications and libraries which misuse the ServerConfig.PublicKeyCallback callback may be susceptible to an authorization bypass. The documentation for ServerConfig.PublicKeyCallback says that \"A call to this function does not guarantee that the key offered is in fact used to authenticate.\" Specifically, the SSH protocol allows clients to inquire about whether a public key is acceptable before proving control of the corresponding private key. PublicKeyCallback may be called with multiple keys, and the order in which the keys were provided cannot be used to infer which key the client successfully authenticated with, if any. Some applications, which store the key(s) passed to PublicKeyCallback (or derived information) and make security relevant determinations based on it once the connection is established, may make incorrect assumptions. For example, an attacker may send public keys A and B, and then authenticate with A. PublicKeyCallback would be called only twice, first with A and then with B. A vulnerable application may then make authorization decisions based on key B for which the attacker does not actually control the private key. Since this API is widely misused, as a partial mitigation golang.org/x/crypto@v0.31.0 enforces the property that, when successfully authenticating via public key, the last key passed to ServerConfig.PublicKeyCallback will be the key used to authenticate the connection. PublicKeyCallback will now be called multiple times with the same key, if necessary."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2024-45337",
+              "help": {
+                "text": "Vulnerability CVE-2024-45337\nSeverity: CRITICAL\nPackage: golang.org/x/crypto\nFixed Version: 0.31.0\nLink: [CVE-2024-45337](https://avd.aquasec.com/nvd/cve-2024-45337)\nApplications and libraries which misuse the ServerConfig.PublicKeyCallback callback may be susceptible to an authorization bypass. The documentation for ServerConfig.PublicKeyCallback says that \"A call to this function does not guarantee that the key offered is in fact used to authenticate.\" Specifically, the SSH protocol allows clients to inquire about whether a public key is acceptable before proving control of the corresponding private key. PublicKeyCallback may be called with multiple keys, and the order in which the keys were provided cannot be used to infer which key the client successfully authenticated with, if any. Some applications, which store the key(s) passed to PublicKeyCallback (or derived information) and make security relevant determinations based on it once the connection is established, may make incorrect assumptions. For example, an attacker may send public keys A and B, and then authenticate with A. PublicKeyCallback would be called only twice, first with A and then with B. A vulnerable application may then make authorization decisions based on key B for which the attacker does not actually control the private key. Since this API is widely misused, as a partial mitigation golang.org/x/crypto@v0.31.0 enforces the property that, when successfully authenticating via public key, the last key passed to ServerConfig.PublicKeyCallback will be the key used to authenticate the connection. PublicKeyCallback will now be called multiple times with the same key, if necessary.",
+                "markdown": "**Vulnerability CVE-2024-45337**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|CRITICAL|golang.org/x/crypto|0.31.0|[CVE-2024-45337](https://avd.aquasec.com/nvd/cve-2024-45337)|\n\nApplications and libraries which misuse the ServerConfig.PublicKeyCallback callback may be susceptible to an authorization bypass. The documentation for ServerConfig.PublicKeyCallback says that \"A call to this function does not guarantee that the key offered is in fact used to authenticate.\" Specifically, the SSH protocol allows clients to inquire about whether a public key is acceptable before proving control of the corresponding private key. PublicKeyCallback may be called with multiple keys, and the order in which the keys were provided cannot be used to infer which key the client successfully authenticated with, if any. Some applications, which store the key(s) passed to PublicKeyCallback (or derived information) and make security relevant determinations based on it once the connection is established, may make incorrect assumptions. For example, an attacker may send public keys A and B, and then authenticate with A. PublicKeyCallback would be called only twice, first with A and then with B. A vulnerable application may then make authorization decisions based on key B for which the attacker does not actually control the private key. Since this API is widely misused, as a partial mitigation golang.org/x/crypto@v0.31.0 enforces the property that, when successfully authenticating via public key, the last key passed to ServerConfig.PublicKeyCallback will be the key used to authenticate the connection. PublicKeyCallback will now be called multiple times with the same key, if necessary."
+              },
+              "properties": {
+                "cvssv3_baseScore": 9.1,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                "precision": "very-high",
+                "security-severity": "9.1",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "CRITICAL"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2022-32149",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "golang: golang.org/x/text/language: ParseAcceptLanguage takes a long time to parse complex tags"
+              },
+              "fullDescription": {
+                "text": "An attacker may cause a denial of service by crafting an Accept-Language header which ParseAcceptLanguage will take significant time to parse."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2022-32149",
+              "help": {
+                "text": "Vulnerability CVE-2022-32149\nSeverity: HIGH\nPackage: golang.org/x/text\nFixed Version: 0.3.8\nLink: [CVE-2022-32149](https://avd.aquasec.com/nvd/cve-2022-32149)\nAn attacker may cause a denial of service by crafting an Accept-Language header which ParseAcceptLanguage will take significant time to parse.",
+                "markdown": "**Vulnerability CVE-2022-32149**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|HIGH|golang.org/x/text|0.3.8|[CVE-2022-32149](https://avd.aquasec.com/nvd/cve-2022-32149)|\n\nAn attacker may cause a denial of service by crafting an Accept-Language header which ParseAcceptLanguage will take significant time to parse."
+              },
+              "properties": {
+                "cvssv3_baseScore": 7.5,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "precision": "very-high",
+                "security-severity": "7.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2021-44228",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "log4j-core: Remote code execution in Log4j 2.x when logs contain an attacker-controlled string value"
+              },
+              "fullDescription": {
+                "text": "Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From log4j 2.15.0, this behavior has been disabled by default. From version 2.16.0 (along with 2.12.2, 2.12.3, and 2.3.1), this functionality has been completely removed. Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2021-44228",
+              "help": {
+                "text": "Vulnerability CVE-2021-44228\nSeverity: CRITICAL\nPackage: org.apache.logging.log4j:log4j-core\nFixed Version: 2.15.0\nLink: [CVE-2021-44228](https://avd.aquasec.com/nvd/cve-2021-44228)\nApache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From log4j 2.15.0, this behavior has been disabled by default. From version 2.16.0 (along with 2.12.2, 2.12.3, and 2.3.1), this functionality has been completely removed. Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects.",
+                "markdown": "**Vulnerability CVE-2021-44228**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|CRITICAL|org.apache.logging.log4j:log4j-core|2.15.0|[CVE-2021-44228](https://avd.aquasec.com/nvd/cve-2021-44228)|\n\nApache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From log4j 2.15.0, this behavior has been disabled by default. From version 2.16.0 (along with 2.12.2, 2.12.3, and 2.3.1), this functionality has been completely removed. Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects."
+              },
+              "properties": {
+                "cvssv3_baseScore": 10,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+                "precision": "very-high",
+                "security-severity": "10.0",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "CRITICAL"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2021-45046",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "log4j-core: DoS in log4j 2.x with thread context message pattern and context lookup pattern (incomplete fix for CVE-2021-44228)"
+              },
+              "fullDescription": {
+                "text": "It was found that the fix to address CVE-2021-44228 in Apache Log4j 2.15.0 was incomplete in certain non-default configurations. This could allows attackers with control over Thread Context Map (MDC) input data when the logging configuration uses a non-default Pattern Layout with either a Context Lookup (for example, $${ctx:loginId}) or a Thread Context Map pattern (%X, %mdc, or %MDC) to craft malicious input data using a JNDI Lookup pattern resulting in an information leak and remote code execution in some environments and local code execution in all environments. Log4j 2.16.0 (Java 8) and 2.12.2 (Java 7) fix this issue by removing support for message lookup patterns and disabling JNDI functionality by default."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2021-45046",
+              "help": {
+                "text": "Vulnerability CVE-2021-45046\nSeverity: CRITICAL\nPackage: org.apache.logging.log4j:log4j-core\nFixed Version: 2.16.0\nLink: [CVE-2021-45046](https://avd.aquasec.com/nvd/cve-2021-45046)\nIt was found that the fix to address CVE-2021-44228 in Apache Log4j 2.15.0 was incomplete in certain non-default configurations. This could allows attackers with control over Thread Context Map (MDC) input data when the logging configuration uses a non-default Pattern Layout with either a Context Lookup (for example, $${ctx:loginId}) or a Thread Context Map pattern (%X, %mdc, or %MDC) to craft malicious input data using a JNDI Lookup pattern resulting in an information leak and remote code execution in some environments and local code execution in all environments. Log4j 2.16.0 (Java 8) and 2.12.2 (Java 7) fix this issue by removing support for message lookup patterns and disabling JNDI functionality by default.",
+                "markdown": "**Vulnerability CVE-2021-45046**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|CRITICAL|org.apache.logging.log4j:log4j-core|2.16.0|[CVE-2021-45046](https://avd.aquasec.com/nvd/cve-2021-45046)|\n\nIt was found that the fix to address CVE-2021-44228 in Apache Log4j 2.15.0 was incomplete in certain non-default configurations. This could allows attackers with control over Thread Context Map (MDC) input data when the logging configuration uses a non-default Pattern Layout with either a Context Lookup (for example, $${ctx:loginId}) or a Thread Context Map pattern (%X, %mdc, or %MDC) to craft malicious input data using a JNDI Lookup pattern resulting in an information leak and remote code execution in some environments and local code execution in all environments. Log4j 2.16.0 (Java 8) and 2.12.2 (Java 7) fix this issue by removing support for message lookup patterns and disabling JNDI functionality by default."
+              },
+              "properties": {
+                "cvssv3_baseScore": 9,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+                "precision": "very-high",
+                "security-severity": "9.0",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "CRITICAL"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2020-8203",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "nodejs-lodash: prototype pollution in zipObjectDeep function"
+              },
+              "fullDescription": {
+                "text": "Prototype pollution attack when using _.zipObjectDeep in lodash before 4.17.20."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2020-8203",
+              "help": {
+                "text": "Vulnerability CVE-2020-8203\nSeverity: HIGH\nPackage: lodash\nFixed Version: 4.17.19\nLink: [CVE-2020-8203](https://avd.aquasec.com/nvd/cve-2020-8203)\nPrototype pollution attack when using _.zipObjectDeep in lodash before 4.17.20.",
+                "markdown": "**Vulnerability CVE-2020-8203**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|HIGH|lodash|4.17.19|[CVE-2020-8203](https://avd.aquasec.com/nvd/cve-2020-8203)|\n\nPrototype pollution attack when using _.zipObjectDeep in lodash before 4.17.20."
+              },
+              "properties": {
+                "cvssv3_baseScore": 7.4,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+                "precision": "very-high",
+                "security-severity": "7.4",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2021-23337",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "nodejs-lodash: command injection via template"
+              },
+              "fullDescription": {
+                "text": "Lodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2021-23337",
+              "help": {
+                "text": "Vulnerability CVE-2021-23337\nSeverity: HIGH\nPackage: lodash\nFixed Version: 4.17.21\nLink: [CVE-2021-23337](https://avd.aquasec.com/nvd/cve-2021-23337)\nLodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function.",
+                "markdown": "**Vulnerability CVE-2021-23337**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|HIGH|lodash|4.17.21|[CVE-2021-23337](https://avd.aquasec.com/nvd/cve-2021-23337)|\n\nLodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function."
+              },
+              "properties": {
+                "cvssv3_baseScore": 7.2,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+                "precision": "very-high",
+                "security-severity": "7.2",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2021-44906",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "minimist: prototype pollution"
+              },
+              "fullDescription": {
+                "text": "Minimist <=1.2.5 is vulnerable to Prototype Pollution via file index.js, function setKey() (lines 69-95)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2021-44906",
+              "help": {
+                "text": "Vulnerability CVE-2021-44906\nSeverity: CRITICAL\nPackage: minimist\nFixed Version: 1.2.6\nLink: [CVE-2021-44906](https://avd.aquasec.com/nvd/cve-2021-44906)\nMinimist <=1.2.5 is vulnerable to Prototype Pollution via file index.js, function setKey() (lines 69-95).",
+                "markdown": "**Vulnerability CVE-2021-44906**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|CRITICAL|minimist|1.2.6|[CVE-2021-44906](https://avd.aquasec.com/nvd/cve-2021-44906)|\n\nMinimist <=1.2.5 is vulnerable to Prototype Pollution via file index.js, function setKey() (lines 69-95)."
+              },
+              "properties": {
+                "cvssv3_baseScore": 9.8,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "precision": "very-high",
+                "security-severity": "9.8",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "CRITICAL"
+                ]
+              }
+            }
+          ],
+          "version": "0.72.0"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CVE-2024-45337",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Package: golang.org/x/crypto\nInstalled Version: v0.17.0\nVulnerability CVE-2024-45337\nSeverity: CRITICAL\nFixed Version: 0.31.0\nLink: [CVE-2024-45337](https://avd.aquasec.com/nvd/cve-2024-45337)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "go.mod",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "go.mod: golang.org/x/crypto@v0.17.0"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2022-32149",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Package: golang.org/x/text\nInstalled Version: v0.3.7\nVulnerability CVE-2022-32149\nSeverity: HIGH\nFixed Version: 0.3.8\nLink: [CVE-2022-32149](https://avd.aquasec.com/nvd/cve-2022-32149)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "go.mod",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "go.mod: golang.org/x/text@v0.3.7"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2021-44228",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Package: org.apache.logging.log4j:log4j-core\nInstalled Version: 2.14.1\nVulnerability CVE-2021-44228\nSeverity: CRITICAL\nFixed Version: 2.15.0\nLink: [CVE-2021-44228](https://avd.aquasec.com/nvd/cve-2021-44228)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app/lib/log4j-core-2.14.1.jar",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "app/lib/log4j-core-2.14.1.jar: org.apache.logging.log4j:log4j-core@2.14.1"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2021-45046",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Package: org.apache.logging.log4j:log4j-core\nInstalled Version: 2.14.1\nVulnerability CVE-2021-45046\nSeverity: CRITICAL\nFixed Version: 2.16.0\nLink: [CVE-2021-45046](https://avd.aquasec.com/nvd/cve-2021-45046)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app/lib/log4j-core-2.14.1.jar",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "app/lib/log4j-core-2.14.1.jar: org.apache.logging.log4j:log4j-core@2.14.1"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2020-8203",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Package: lodash\nInstalled Version: 4.17.15\nVulnerability CVE-2020-8203\nSeverity: HIGH\nFixed Version: 4.17.19\nLink: [CVE-2020-8203](https://avd.aquasec.com/nvd/cve-2020-8203)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1042,
+                  "startColumn": 1,
+                  "endLine": 1047,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: lodash@4.17.15"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2021-23337",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Package: lodash\nInstalled Version: 4.17.15\nVulnerability CVE-2021-23337\nSeverity: HIGH\nFixed Version: 4.17.21\nLink: [CVE-2021-23337](https://avd.aquasec.com/nvd/cve-2021-23337)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1042,
+                  "startColumn": 1,
+                  "endLine": 1047,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: lodash@4.17.15"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2021-44906",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "Package: minimist\nInstalled Version: 1.2.5\nVulnerability CVE-2021-44906\nSeverity: CRITICAL\nFixed Version: 1.2.6\nLink: [CVE-2021-44906](https://avd.aquasec.com/nvd/cve-2021-44906)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1103,
+                  "startColumn": 1,
+                  "endLine": 1108,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: minimist@1.2.5"
+              }
+            }
+          ]
+        }
+      ],
+      "columnKind": "utf16CodeUnits"
+    }
+  ]
+}

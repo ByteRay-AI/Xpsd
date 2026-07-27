@@ -1,0 +1,33 @@
+# Build output
+build/
+bin/
+*.exe
+
+# Analysis output
+out/
+output/
+
+# Go
+*.test
+*.out
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Compiled binaries (never commit)
+cmd/xpsd/xpsd
+tools/mcp-server/src/mcp
+__pycache__/
+
+docs/TODO.md
+
+# for now
+test/vulnerable-sshd/

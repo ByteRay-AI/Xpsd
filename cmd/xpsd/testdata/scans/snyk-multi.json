@@ -1,0 +1,390 @@
+[
+  {
+    "vulnerabilities": [
+      {
+        "id": "SNYK-JAVA-ORGAPACHELOGGINGLOG4J-2314720",
+        "title": "Remote Code Execution (RCE)",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:H",
+        "credit": [
+          "Chen Zhaojun of Alibaba Cloud Security Team"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[2.0-beta9,2.3.1)",
+            "[2.4,2.12.2)",
+            "[2.13.0,2.15.0)"
+          ]
+        },
+        "exploit": "Mature",
+        "fixedIn": [
+          "2.3.1",
+          "2.12.2",
+          "2.15.0"
+        ],
+        "patches": [],
+        "language": "java",
+        "severity": "critical",
+        "cvssScore": 10.0,
+        "functions": [],
+        "moduleName": "org.apache.logging.log4j:log4j-core",
+        "references": [
+          {
+            "url": "https://github.com/apache/logging-log4j2/commit/7fe72d6",
+            "title": "GitHub Commit"
+          },
+          {
+            "url": "https://logging.apache.org/log4j/2.x/security.html",
+            "title": "Security Advisory"
+          },
+          {
+            "url": "https://www.lunasec.io/docs/blog/log4j-zero-day/",
+            "title": "Log4Shell Advisory"
+          }
+        ],
+        "identifiers": {
+          "CVE": [
+            "CVE-2021-44228"
+          ],
+          "CWE": [
+            "CWE-74",
+            "CWE-502"
+          ],
+          "GHSA": [
+            "GHSA-jfh8-c2jp-5v3q"
+          ]
+        },
+        "packageName": "org.apache.logging.log4j:log4j-core",
+        "creationTime": "2021-12-10T10:08:47.856000Z",
+        "packageManager": "maven",
+        "disclosureTime": "2021-12-10T10:02:55Z",
+        "publicationTime": "2021-12-10T10:08:48Z",
+        "modificationTime": "2022-12-13T09:22:01.856000Z",
+        "description": "## Overview\n[org.apache.logging.log4j:log4j-core](https://logging.apache.org/log4j/2.x/) is a logging library for Java.\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE). Apache Log4j2 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from remote servers when message lookup substitution is enabled.\n\nThis vulnerability is also known as Log4Shell.\n\n## Remediation\nUpgrade `org.apache.logging.log4j:log4j-core` to version 2.3.1, 2.12.2, 2.15.0 or higher.\n\n## References\n- [Apache Security Advisory](https://logging.apache.org/log4j/2.x/security.html)\n- [CISA Guidance](https://www.cisa.gov/uscert/apache-log4j-vulnerability-guidance)\n",
+        "from": [
+          "com.example:xpsd-fixture-service@1.2.0",
+          "org.apache.logging.log4j:log4j-core@2.14.1"
+        ],
+        "upgradePath": [
+          false,
+          "org.apache.logging.log4j:log4j-core@2.15.0"
+        ],
+        "isUpgradable": true,
+        "isPatchable": false,
+        "name": "org.apache.logging.log4j:log4j-core",
+        "version": "2.14.1"
+      },
+      {
+        "id": "SNYK-JAVA-ORGAPACHELOGGINGLOG4J-2320014",
+        "title": "Denial of Service (DoS)",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/E:P",
+        "credit": [
+          "Kai Mindermann"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[2.0-beta9,2.3.1)",
+            "[2.4,2.12.2)",
+            "[2.13.0,2.16.0)"
+          ]
+        },
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "2.3.1",
+          "2.12.2",
+          "2.16.0"
+        ],
+        "patches": [],
+        "language": "java",
+        "severity": "critical",
+        "cvssScore": 9.0,
+        "functions": [],
+        "moduleName": "org.apache.logging.log4j:log4j-core",
+        "references": [
+          {
+            "url": "https://logging.apache.org/log4j/2.x/security.html",
+            "title": "Security Advisory"
+          }
+        ],
+        "identifiers": {
+          "CVE": [
+            "CVE-2021-45046"
+          ],
+          "CWE": [
+            "CWE-74"
+          ],
+          "GHSA": [
+            "GHSA-7rjr-3q55-vv33"
+          ]
+        },
+        "packageName": "org.apache.logging.log4j:log4j-core",
+        "creationTime": "2021-12-14T20:26:47.856000Z",
+        "packageManager": "maven",
+        "disclosureTime": "2021-12-14T19:01:44Z",
+        "publicationTime": "2021-12-14T20:26:48Z",
+        "modificationTime": "2022-12-13T09:23:01.856000Z",
+        "description": "## Overview\n[org.apache.logging.log4j:log4j-core](https://logging.apache.org/log4j/2.x/) is a logging library for Java.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) and remote code execution in certain non-default configurations. The fix for CVE-2021-44228 in Log4j 2.15.0 was incomplete: when the logging configuration uses a non-default Pattern Layout with a Context Lookup, attackers with control over Thread Context Map (MDC) input data can craft malicious input using a JNDI Lookup pattern.\n\n## Remediation\nUpgrade `org.apache.logging.log4j:log4j-core` to version 2.3.1, 2.12.2, 2.16.0 or higher.\n",
+        "from": [
+          "com.example:xpsd-fixture-service@1.2.0",
+          "org.apache.logging.log4j:log4j-core@2.14.1"
+        ],
+        "upgradePath": [
+          false,
+          "org.apache.logging.log4j:log4j-core@2.16.0"
+        ],
+        "isUpgradable": true,
+        "isPatchable": false,
+        "name": "org.apache.logging.log4j:log4j-core",
+        "version": "2.14.1"
+      },
+      {
+        "id": "SNYK-JAVA-ORGAPACHELOGGINGLOG4J-2321524",
+        "title": "Denial of Service (DoS)",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H/E:P",
+        "credit": [
+          "Hideki Okamoto of Akamai Technologies",
+          "Guy Lederfein of Trend Micro Research"
+        ],
+        "semver": {
+          "vulnerable": [
+            "[2.0-alpha1,2.3.1)",
+            "[2.4,2.12.3)",
+            "[2.13.0,2.17.0)"
+          ]
+        },
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "2.3.1",
+          "2.12.3",
+          "2.17.0"
+        ],
+        "patches": [],
+        "language": "java",
+        "severity": "medium",
+        "cvssScore": 5.9,
+        "functions": [],
+        "moduleName": "org.apache.logging.log4j:log4j-core",
+        "references": [
+          {
+            "url": "https://logging.apache.org/log4j/2.x/security.html",
+            "title": "Security Advisory"
+          }
+        ],
+        "identifiers": {
+          "CVE": [
+            "CVE-2021-45105"
+          ],
+          "CWE": [
+            "CWE-674"
+          ],
+          "GHSA": [
+            "GHSA-p6xc-xr62-6r2g"
+          ]
+        },
+        "packageName": "org.apache.logging.log4j:log4j-core",
+        "creationTime": "2021-12-18T09:47:47.856000Z",
+        "packageManager": "maven",
+        "disclosureTime": "2021-12-18T09:37:44Z",
+        "publicationTime": "2021-12-18T09:47:48Z",
+        "modificationTime": "2022-12-13T09:24:01.856000Z",
+        "description": "## Overview\n[org.apache.logging.log4j:log4j-core](https://logging.apache.org/log4j/2.x/) is a logging library for Java.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS). It does not protect from uncontrolled recursion from self-referential lookups. When the logging configuration uses a non-default Pattern Layout with a Context Lookup, attackers with control over Thread Context Map data can craft malicious input containing a recursive lookup, resulting in a StackOverflowError that terminates the process.\n\n## Remediation\nUpgrade `org.apache.logging.log4j:log4j-core` to version 2.3.1, 2.12.3, 2.17.0 or higher.\n",
+        "from": [
+          "com.example:xpsd-fixture-service@1.2.0",
+          "org.apache.logging.log4j:log4j-core@2.14.1"
+        ],
+        "upgradePath": [
+          false,
+          "org.apache.logging.log4j:log4j-core@2.17.0"
+        ],
+        "isUpgradable": true,
+        "isPatchable": false,
+        "name": "org.apache.logging.log4j:log4j-core",
+        "version": "2.14.1"
+      }
+    ],
+    "ok": false,
+    "dependencyCount": 42,
+    "org": "argus-xpsd",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.0\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {}
+    },
+    "packageManager": "maven",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false,
+      "autoApproveIgnores": false
+    },
+    "summary": "3 vulnerable dependency paths",
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 3,
+    "targetFile": "service/pom.xml",
+    "projectName": "com.example:xpsd-fixture-service",
+    "displayTargetFile": "service/pom.xml",
+    "path": "/work/src"
+  },
+  {
+    "vulnerabilities": [
+      {
+        "id": "SNYK-JS-LODASH-567746",
+        "title": "Prototype Pollution",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:L/E:P",
+        "credit": [
+          "posix"
+        ],
+        "semver": {
+          "vulnerable": [
+            "<4.17.16"
+          ]
+        },
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "4.17.16"
+        ],
+        "patches": [],
+        "language": "js",
+        "severity": "high",
+        "cvssScore": 7.4,
+        "functions": [],
+        "moduleName": "lodash",
+        "references": [
+          {
+            "url": "https://hackerone.com/reports/712065",
+            "title": "HackerOne Report"
+          },
+          {
+            "url": "https://github.com/lodash/lodash/commit/c84fe82760fb2d3e03a63379b297a1cc1a2fce12",
+            "title": "GitHub Commit"
+          }
+        ],
+        "identifiers": {
+          "CVE": [
+            "CVE-2020-8203"
+          ],
+          "CWE": [
+            "CWE-400",
+            "CWE-1321"
+          ],
+          "GHSA": [
+            "GHSA-p6mc-m468-83gw"
+          ]
+        },
+        "packageName": "lodash",
+        "creationTime": "2020-04-28T10:54:44.994000Z",
+        "packageManager": "npm",
+        "disclosureTime": "2020-04-28T10:52:47Z",
+        "publicationTime": "2020-04-28T15:54:45Z",
+        "modificationTime": "2022-01-03T16:07:22.372435Z",
+        "description": "## Overview\n[lodash](https://www.npmjs.com/package/lodash) is a modern JavaScript utility library delivering modularity, performance, & extras.\n\nAffected versions of this package are vulnerable to Prototype Pollution via the `zipObjectDeep` function.\n\n## Remediation\nUpgrade `lodash` to version 4.17.16 or higher.\n",
+        "from": [
+          "xpsd-fixture-web@2.1.0",
+          "lodash@4.17.15"
+        ],
+        "upgradePath": [
+          false,
+          "lodash@4.17.16"
+        ],
+        "isUpgradable": true,
+        "isPatchable": false,
+        "name": "lodash",
+        "version": "4.17.15"
+      },
+      {
+        "id": "SNYK-JS-MINIMIST-559764",
+        "title": "Prototype Pollution",
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L/E:P",
+        "credit": [
+          "Snyk Security Team"
+        ],
+        "semver": {
+          "vulnerable": [
+            "<0.2.1",
+            ">=1.0.0 <1.2.3"
+          ]
+        },
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "0.2.1",
+          "1.2.3"
+        ],
+        "patches": [],
+        "language": "js",
+        "severity": "medium",
+        "cvssScore": 5.6,
+        "functions": [],
+        "moduleName": "minimist",
+        "references": [
+          {
+            "url": "https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab",
+            "title": "GitHub Commit"
+          }
+        ],
+        "identifiers": {
+          "CVE": [
+            "CVE-2020-7598"
+          ],
+          "CWE": [
+            "CWE-1321"
+          ],
+          "GHSA": [
+            "GHSA-vh95-rmgr-6w4m"
+          ]
+        },
+        "packageName": "minimist",
+        "creationTime": "2020-03-11T08:22:19.589000Z",
+        "packageManager": "npm",
+        "disclosureTime": "2020-03-10T08:22:24Z",
+        "publicationTime": "2020-03-11T08:22:19Z",
+        "modificationTime": "2021-09-23T10:46:35.517000Z",
+        "description": "## Overview\n[minimist](https://www.npmjs.com/package/minimist) is a parser of argument options.\n\nAffected versions of this package are vulnerable to Prototype Pollution using a constructor or `__proto__` payload.\n\n## Remediation\nUpgrade `minimist` to version 0.2.1, 1.2.3 or higher.\n",
+        "from": [
+          "xpsd-fixture-web@2.1.0",
+          "mkdirp@0.5.1",
+          "minimist@0.0.8"
+        ],
+        "upgradePath": [
+          false,
+          "mkdirp@0.5.5",
+          "minimist@1.2.5"
+        ],
+        "isUpgradable": true,
+        "isPatchable": false,
+        "name": "minimist",
+        "version": "0.0.8"
+      }
+    ],
+    "ok": false,
+    "dependencyCount": 63,
+    "org": "argus-xpsd",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.0\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+      "severities": {},
+      "orgLicenseRules": {}
+    },
+    "packageManager": "npm",
+    "ignoreSettings": {
+      "adminOnly": false,
+      "reasonRequired": false,
+      "disregardFilesystemIgnores": false,
+      "autoApproveIgnores": false
+    },
+    "summary": "2 vulnerable dependency paths",
+    "filesystemPolicy": false,
+    "filtered": {
+      "ignore": [],
+      "patch": []
+    },
+    "uniqueCount": 2,
+    "targetFile": "web/package.json",
+    "projectName": "xpsd-fixture-web",
+    "displayTargetFile": "web/package.json",
+    "path": "/work/src"
+  }
+]
