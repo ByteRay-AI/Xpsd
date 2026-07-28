@@ -14,7 +14,7 @@ RUN  cd tools/mcp-server/src && CGO_ENABLED=0 go build -o /out/mcp . \
   && cd /src/cmd/xpsd        && CGO_ENABLED=0 go build -ldflags "-X main.buildVersion=${VERSION}" -o /out/xpsd .
 
 # Stage 2: runtime
-FROM node:20-bookworm-slim
+FROM node:26-bookworm-slim
 
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
