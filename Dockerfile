@@ -2,7 +2,7 @@
 # Copyright 2026 ByteRay Ltd.
 
 # Stage 1: build Go binaries
-FROM golang:1.25-bookworm AS builder
+FROM golang:1.26-bookworm AS builder
 
 ARG VERSION=dev
 
