@@ -139,6 +139,19 @@ Bug reports and pull requests are welcome; see
 described in [SECURITY.md](SECURITY.md), which also documents the threat model
 and known limitations.
 
+## Community and support
+
+For community discussion, setup help, and general questions, join our
+[Discord server](https://discord.gg/NKxz6rvAc).
+
+For project work that should stay discoverable and actionable on GitHub, please use:
+
+- [GitHub Issues](../../issues) for bug reports and feature requests
+- [Pull Requests](../../pulls) for proposed code changes
+- [SECURITY.md](SECURITY.md) for responsible disclosure of vulnerabilities
+- [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines
+
+
 ## License
 
 Apache License 2.0, see [LICENSE](LICENSE). Copyright 2026 ByteRay Ltd.
