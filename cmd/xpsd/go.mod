@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/github/copilot-sdk/go v1.0.6
-	github.com/santhosh-tekuri/jsonschema/v6 v6.0.2
+	github.com/santhosh-tekuri/jsonschema/v6 v6.0.3
 )
 
 require (
