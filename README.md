@@ -1,3 +1,7 @@
+> **Xpsd is an OWASP project.** The project is maintained at
+> [OWASP/Xpsd](https://github.com/OWASP/Xpsd). Visit that repository for the
+> latest updates, to report issues, and to contribute.
+
 <p align="center">
   <img src="docs/logo.png" alt="Xpsd" width="420">
 </p>
